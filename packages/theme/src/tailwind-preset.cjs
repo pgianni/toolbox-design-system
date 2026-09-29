@@ -39,7 +39,9 @@ module.exports = {
           muted: "hsl(var(--card-muted))"
         },
         app: "hsl(var(--app-background))",
-        icebreaker: "hsl(var(--icebreaker))"
+        "app-background": "hsl(var(--app-background))",
+        icebreaker: "hsl(var(--icebreaker))",
+        "card-muted": "hsl(var(--card-muted))"
       },
       borderRadius: {
         lg: "var(--radius-lg)",
