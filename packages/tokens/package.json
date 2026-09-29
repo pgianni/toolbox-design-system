@@ -1,0 +1,24 @@
+{
+  "name": "@pgianni/toolbox-tokens",
+  "version": "0.1.0",
+  "private": false,
+  "files": [
+    "src"
+  ],
+  "exports": {
+    "./css": "./src/tokens.css",
+    "./json": "./src/tokens.json"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pgianni/toolbox-design-system.git",
+    "directory": "packages/tokens"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

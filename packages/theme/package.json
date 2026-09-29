@@ -1,0 +1,30 @@
+{
+  "name": "@pgianni/toolbox-theme",
+  "version": "0.1.0",
+  "private": false,
+  "files": [
+    "src"
+  ],
+  "exports": {
+    "./css": "./src/theme.css",
+    "./tailwind-preset": "./src/tailwind-preset.cjs"
+  },
+  "dependencies": {
+    "@pgianni/toolbox-tokens": "0.1.0"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.4.0"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pgianni/toolbox-design-system.git",
+    "directory": "packages/theme"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
