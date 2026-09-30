@@ -17,6 +17,38 @@ function PlusIcon() {
   );
 }
 
+function ChevronRightIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m9 18 6-6-6-6" />
+    </svg>
+  );
+}
+
+function SpinnerIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      className="animate-spin"
+    >
+      <path d="M21 12a9 9 0 1 1-6.22-8.56" />
+    </svg>
+  );
+}
+
 const variants = [
   "default",
   "secondary",
@@ -128,6 +160,33 @@ export const States: Story = {
       <Button disabled>Désactivé</Button>
       <Button aria-busy="true">Chargement…</Button>
     </div>
+  )
+};
+
+export const WithLeadingIcon: Story = {
+  render: () => (
+    <Button type="button">
+      <PlusIcon />
+      Ajouter un projet
+    </Button>
+  )
+};
+
+export const WithTrailingChevron: Story = {
+  render: () => (
+    <Button type="button" variant="outline">
+      Continuer
+      <ChevronRightIcon />
+    </Button>
+  )
+};
+
+export const Loading: Story = {
+  render: () => (
+    <Button type="button" disabled aria-busy="true">
+      <SpinnerIcon />
+      Enregistrement…
+    </Button>
   )
 };
 
