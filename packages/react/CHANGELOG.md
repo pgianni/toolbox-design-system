@@ -1,5 +1,12 @@
 # @pgianni/toolbox-react
 
+## 0.4.0
+
+### Minor Changes
+
+- 81bc568: Add gradient and shape variants plus a complete icon button size scale.
+- f45fea7: Add shared Tooltip, Skeleton, and Separator components.
+
 ## 0.3.0
 
 ### Minor Changes
