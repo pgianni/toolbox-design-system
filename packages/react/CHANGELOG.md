@@ -1,5 +1,11 @@
 # @pgianni/toolbox-react
 
+## 0.3.0
+
+### Minor Changes
+
+- 30e5687: Add shared Input, Textarea, Label, Card, and Badge components.
+
 ## 0.2.1
 
 ### Patch Changes
