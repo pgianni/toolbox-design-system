@@ -12,7 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@pgianni/toolbox-react": "^0.2.1",
+    "@pgianni/toolbox-react": "file:../../packages/react",
     "@pgianni/toolbox-theme": "^0.1.1",
     "@pgianni/toolbox-tokens": "^0.1.0",
     "react": "^19.2.8",
