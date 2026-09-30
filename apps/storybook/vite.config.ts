@@ -12,6 +12,9 @@ const dirname = import.meta.dirname ?? path.dirname(fileURLToPath(import.meta.ur
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    dedupe: ['react', 'react-dom']
+  },
   optimizeDeps: {
     include: ['msw-storybook-addon/csf3']
   },

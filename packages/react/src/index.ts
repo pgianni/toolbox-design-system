@@ -11,4 +11,13 @@ export {
   CardContent
 } from "./components/card";
 export { Badge, badgeVariants, type BadgeProps } from "./components/badge";
+export {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+  type TooltipContentProps
+} from "./components/tooltip";
+export { Skeleton, type SkeletonProps } from "./components/skeleton";
+export { Separator, type SeparatorProps } from "./components/separator";
 export { cn } from "./lib";
