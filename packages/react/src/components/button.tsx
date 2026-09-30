@@ -23,9 +23,9 @@ export const buttonVariants = cva(
         "brand-ghost": "rounded-full text-primary hover:bg-primary/10 dark:hover:bg-primary/20"
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-full px-3",
-        lg: "h-11 rounded-full px-4",
+        default: "h-10 px-4 py-2 text-sm",
+        sm: "h-9 px-3 text-sm",
+        lg: "h-11 px-6 text-base",
         icon: "h-10 w-10",
         "icon-xs": "h-6 w-6 p-0 [&_svg]:size-3",
         "icon-sm": "h-8 w-8 p-0 [&_svg]:size-4",
@@ -33,14 +33,15 @@ export const buttonVariants = cva(
         "icon-lg": "h-11 w-11 p-0 [&_svg]:size-5"
       },
       shape: {
-        default: "rounded-md",
+        rounded: "rounded-md",
         pill: "rounded-full",
         square: "rounded-none"
       }
     },
     defaultVariants: {
       variant: "default",
-      size: "default"
+      size: "default",
+      shape: "pill"
     }
   }
 );

@@ -84,7 +84,7 @@ const meta = {
     },
     shape: {
       control: "select",
-      options: [undefined, "default", "pill", "square"]
+      options: ["pill", "rounded", "square"]
     }
   }
 } satisfies Meta<typeof Button>;
@@ -115,7 +115,7 @@ export const Sizes: Story = {
   render: () => (
     <div className="flex items-end gap-3">
       {sizes.map((size) => (
-        <Button key={size} size={size} shape="default" type="button">
+        <Button key={size} size={size} type="button">
           Taille {size}
         </Button>
       ))}
@@ -146,8 +146,8 @@ export const IconButtons: Story = {
 export const Shapes: Story = {
   render: () => (
     <div className="flex items-center gap-3">
-      <Button shape="default">Default</Button>
-      <Button shape="pill">Pill</Button>
+      <Button shape="pill">Pill — défaut</Button>
+      <Button shape="rounded">Rounded</Button>
       <Button shape="square">Square</Button>
     </div>
   )
