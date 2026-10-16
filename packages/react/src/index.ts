@@ -32,4 +32,62 @@ export {
   type TabsTriggerProps,
   type TabsContentProps
 } from "./components/tabs";
+export {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogClose,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+  dialogContentVariants,
+  type DialogOverlayProps,
+  type DialogContentProps
+} from "./components/dialog";
+export {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetOverlay,
+  SheetPortal,
+  SheetTitle,
+  SheetTrigger,
+  sheetVariants,
+  type SheetOverlayProps,
+  type SheetContentProps,
+  type SheetSize
+} from "./components/sheet";
+export {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuGroup,
+  DropdownMenuPortal,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuRadioGroup,
+  dropdownMenuItemVariants,
+  type DropdownMenuSubTriggerProps,
+  type DropdownMenuItemProps,
+  type DropdownMenuLabelProps
+} from "./components/dropdown-menu";
+export {
+  Switch,
+  switchVariants,
+  type SwitchProps
+} from "./components/switch";
+export { Toaster, toast, type ToasterProps } from "./components/toaster";
 export { cn } from "./lib";
