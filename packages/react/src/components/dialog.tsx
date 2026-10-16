@@ -9,22 +9,45 @@ const DialogPortal = DialogPrimitive.Portal;
 const DialogClose = DialogPrimitive.Close;
 
 const dialogContentVariants = cva(
-  "fixed left-1/2 top-1/2 z-50 grid max-h-[calc(100vh-2rem)] w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 overflow-y-auto rounded-lg border bg-background p-6 text-foreground shadow-lg outline-none transition duration-200 data-[state=closed]:scale-95 data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100",
+  "fixed left-1/2 top-1/2 z-50 max-h-[calc(100vh-2rem)] w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-background text-foreground shadow-lg outline-none transition duration-200 data-[state=closed]:scale-95 data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100",
   {
     variants: {
       size: {
-        sm: "max-w-sm",
-        md: "max-w-lg",
-        lg: "max-w-2xl",
-        xl: "max-w-4xl",
+        sm: "max-w-[28rem]",
+        md: "max-w-[32rem]",
+        lg: "max-w-[42rem]",
+        xl: "max-w-[48rem]",
+        "2xl": "max-w-[56rem]",
         full: "h-[calc(100vh-2rem)] max-w-[calc(100vw-2rem)]"
+      },
+      variant: {
+        default: "grid gap-4 overflow-y-auto p-6",
+        sectioned: "flex flex-col gap-0 overflow-hidden p-0",
+        chromeless:
+          "grid gap-0 overflow-hidden border-0 bg-transparent p-0 shadow-none"
+      },
+      fixedSections: {
+        true: "flex flex-col overflow-hidden",
+        false: null
       }
     },
     defaultVariants: {
-      size: "md"
+      size: "md",
+      variant: "default",
+      fixedSections: false
     }
   }
 );
+
+type DialogLayoutContextValue = {
+  variant: NonNullable<VariantProps<typeof dialogContentVariants>["variant"]>;
+  fixedSections: boolean;
+};
+
+const DialogLayoutContext = React.createContext<DialogLayoutContextValue>({
+  variant: "default",
+  fixedSections: false
+});
 
 export interface DialogOverlayProps
   extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay> {}
@@ -61,32 +84,50 @@ const DialogContent = React.forwardRef<
       className,
       children,
       size,
+      variant,
+      fixedSections = false,
       overlayClassName,
       showClose = true,
       closeLabel = "Fermer",
       ...props
     },
     ref
-  ) => (
-    <DialogPortal>
-      <DialogOverlay className={overlayClassName} />
-      <DialogPrimitive.Content
-        ref={ref}
-        className={cn(dialogContentVariants({ size }), className)}
-        {...props}
-      >
-        {children}
-        {showClose ? (
-          <DialogPrimitive.Close
-            className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none"
+  ) => {
+    const normalizedVariant = variant ?? "default";
+    const hasFixedSections = fixedSections || normalizedVariant === "sectioned";
+
+    return (
+      <DialogPortal>
+        <DialogOverlay className={overlayClassName} />
+        <DialogPrimitive.Content
+          ref={ref}
+          className={cn(
+            dialogContentVariants({
+              size,
+              variant: normalizedVariant,
+              fixedSections: hasFixedSections
+            }),
+            className
+          )}
+          {...props}
+        >
+          <DialogLayoutContext.Provider
+            value={{ variant: normalizedVariant, fixedSections: hasFixedSections }}
           >
-            <CloseIcon />
-            <span className="sr-only">{closeLabel}</span>
-          </DialogPrimitive.Close>
-        ) : null}
-      </DialogPrimitive.Content>
-    </DialogPortal>
-  )
+            {children}
+          </DialogLayoutContext.Provider>
+          {showClose ? (
+            <DialogPrimitive.Close
+              className="absolute right-3 top-3 inline-flex h-10 w-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none"
+            >
+              <CloseIcon />
+              <span className="sr-only">{closeLabel}</span>
+            </DialogPrimitive.Close>
+          ) : null}
+        </DialogPrimitive.Content>
+      </DialogPortal>
+    );
+  }
 );
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
@@ -94,23 +135,56 @@ function DialogHeader({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
+  const { variant, fixedSections } = React.useContext(DialogLayoutContext);
+
   return (
     <div
-      className={cn("flex flex-col gap-1.5 text-center sm:text-left", className)}
+      className={cn(
+        "flex flex-col gap-1.5 text-center sm:text-left",
+        fixedSections && "shrink-0",
+        variant === "sectioned" && "border-b px-6 py-5 pr-16",
+        className
+      )}
       {...props}
     />
   );
 }
 DialogHeader.displayName = "DialogHeader";
 
+export type DialogBodyProps = React.HTMLAttributes<HTMLDivElement>;
+
+const DialogBody = React.forwardRef<HTMLDivElement, DialogBodyProps>(
+  ({ className, ...props }, ref) => {
+    const { variant, fixedSections } = React.useContext(DialogLayoutContext);
+
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "min-h-0",
+          fixedSections && "flex-1 overflow-y-auto",
+          variant === "sectioned" && "px-6 py-5",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+DialogBody.displayName = "DialogBody";
+
 function DialogFooter({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
+  const { variant, fixedSections } = React.useContext(DialogLayoutContext);
+
   return (
     <div
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+        fixedSections && "shrink-0",
+        variant === "sectioned" && "border-t px-6 py-4",
         className
       )}
       {...props}
@@ -167,6 +241,7 @@ export {
   DialogTrigger,
   DialogContent,
   DialogHeader,
+  DialogBody,
   DialogFooter,
   DialogTitle,
   DialogDescription,

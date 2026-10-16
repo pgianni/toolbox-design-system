@@ -40,12 +40,14 @@ export {
   DialogTrigger,
   DialogContent,
   DialogHeader,
+  DialogBody,
   DialogFooter,
   DialogTitle,
   DialogDescription,
   dialogContentVariants,
   type DialogOverlayProps,
-  type DialogContentProps
+  type DialogContentProps,
+  type DialogBodyProps
 } from "./components/dialog";
 export {
   Sheet,
