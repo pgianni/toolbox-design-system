@@ -66,10 +66,12 @@ function SpinnerIcon() {
 }
 
 const variants = [
-  "default",
+  "primary",
   "secondary",
-  "outline",
+  "tertiary",
   "ghost",
+  "default",
+  "outline",
   "destructive",
   "link",
   "brand",
@@ -78,6 +80,18 @@ const variants = [
   "purple",
   "gradient",
   "save"
+] as const;
+
+const showcasedVariants = [
+  "primary",
+  "secondary",
+  "tertiary",
+  "ghost",
+  "destructive",
+  "link",
+  "gradient",
+  "brand-outline",
+  "brand-ghost"
 ] as const;
 
 const sizes = ["sm", "default", "lg"] as const;
@@ -111,6 +125,31 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     children: "Créer un projet",
+    variant: "primary",
+    type: "button"
+  }
+};
+
+export const Secondary: Story = {
+  args: {
+    children: "Voir le projet",
+    variant: "secondary",
+    type: "button"
+  }
+};
+
+export const Tertiary: Story = {
+  args: {
+    children: "En savoir plus",
+    variant: "tertiary",
+    type: "button"
+  }
+};
+
+export const Ghost: Story = {
+  args: {
+    children: "Ouvrir les options",
+    variant: "ghost",
     type: "button"
   }
 };
@@ -118,13 +157,20 @@ export const Primary: Story = {
 export const Variants: Story = {
   render: () => (
     <div className="flex max-w-3xl flex-wrap items-center justify-center gap-3">
-      {variants.map((variant) => (
+      {showcasedVariants.map((variant) => (
         <Button key={variant} variant={variant} type="button">
           {variant}
         </Button>
       ))}
     </div>
-  )
+  ),
+  play: async ({ canvas }) => {
+    for (const name of ["secondary", "tertiary", "ghost"]) {
+      const button = canvas.getByRole("button", { name });
+      await expect(button.className).toContain("active:translate-y-0.5");
+      await expect(button.className).toContain("duration-150");
+    }
+  }
 };
 
 export const Sizes: Story = {
@@ -190,7 +236,7 @@ export const WithLeadingIcon: Story = {
 
 export const WithTrailingIcon: Story = {
   render: () => (
-    <Button type="button" variant="outline">
+    <Button type="button" variant="tertiary">
       Continuer
       <ArrowRightIcon />
     </Button>
@@ -208,7 +254,7 @@ export const TrailingIconVariants: Story = {
         Voir le projet
         <ArrowRightIcon />
       </Button>
-      <Button type="button" variant="outline">
+      <Button type="button" variant="tertiary">
         En savoir plus
         <ArrowRightIcon />
       </Button>
