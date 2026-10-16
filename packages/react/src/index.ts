@@ -20,4 +20,16 @@ export {
 } from "./components/tooltip";
 export { Skeleton, type SkeletonProps } from "./components/skeleton";
 export { Separator, type SeparatorProps } from "./components/separator";
+export {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  tabsListVariants,
+  tabsTriggerVariants,
+  type TabsProps,
+  type TabsListProps,
+  type TabsTriggerProps,
+  type TabsContentProps
+} from "./components/tabs";
 export { cn } from "./lib";

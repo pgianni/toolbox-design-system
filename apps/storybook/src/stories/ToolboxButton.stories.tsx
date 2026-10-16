@@ -17,7 +17,7 @@ function PlusIcon() {
   );
 }
 
-function ChevronRightIcon() {
+function ArrowRightIcon() {
   return (
     <svg
       aria-hidden="true"
@@ -29,6 +29,22 @@ function ChevronRightIcon() {
       strokeLinejoin="round"
     >
       <path d="m9 18 6-6-6-6" />
+    </svg>
+  );
+}
+
+function ChevronDownIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m6 9 6 6 6-6" />
     </svg>
   );
 }
@@ -172,12 +188,55 @@ export const WithLeadingIcon: Story = {
   )
 };
 
-export const WithTrailingChevron: Story = {
+export const WithTrailingIcon: Story = {
   render: () => (
     <Button type="button" variant="outline">
       Continuer
-      <ChevronRightIcon />
+      <ArrowRightIcon />
     </Button>
+  )
+};
+
+export const TrailingIconVariants: Story = {
+  render: () => (
+    <div className="flex flex-wrap items-center justify-center gap-3">
+      <Button type="button">
+        Continuer
+        <ArrowRightIcon />
+      </Button>
+      <Button type="button" variant="secondary">
+        Voir le projet
+        <ArrowRightIcon />
+      </Button>
+      <Button type="button" variant="outline">
+        En savoir plus
+        <ArrowRightIcon />
+      </Button>
+      <Button type="button" variant="ghost">
+        Ouvrir
+        <ArrowRightIcon />
+      </Button>
+    </div>
+  )
+};
+
+export const WithTrailingChevron: Story = {
+  name: "Split button avec chevron",
+  render: () => (
+    <div role="group" aria-label="Actions de publication" className="inline-flex">
+      <Button type="button" className="rounded-r-none pr-3">
+        Publier
+      </Button>
+      <Button
+        type="button"
+        size="icon"
+        className="rounded-l-none border-l border-primary-foreground/30"
+        aria-label="Afficher les options de publication"
+        aria-haspopup="menu"
+      >
+        <ChevronDownIcon />
+      </Button>
+    </div>
   )
 };
 
