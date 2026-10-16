@@ -1,5 +1,13 @@
 # @pgianni/toolbox-react
 
+## 0.4.0
+
+### Minor Changes
+
+- 81bc568: Add semantic primary and tertiary variants, pressed motion for secondary, tertiary, and ghost buttons, gradient and shape variants, plus a complete icon button size scale.
+- f45fea7: Add shared Tooltip, Skeleton, and Separator components.
+- 83d9bc5: Add shared Dialog, Sheet, DropdownMenu, Switch, and Toast components with accessible primitives and Toolbox styling. Dialog includes a scrollable body, fixed sections, exact application size presets, sectioned and chromeless layouts, and a 40 px close target.
+
 ## 0.3.0
 
 ### Minor Changes
