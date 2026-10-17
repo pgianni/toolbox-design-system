@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { useEffect, useState } from "react";
 import { expect, userEvent, waitFor, within } from "storybook/test";
 import {
   AppHeader,
@@ -56,8 +57,11 @@ const SunIcon = () => (
 const MoonIcon = () => (
   <Glyph><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" /></Glyph>
 );
-const LogOutIcon = () => (
+const LogInIcon = () => (
   <Glyph><path d="M10 17l5-5-5-5M15 12H3M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" /></Glyph>
+);
+const LogOutIcon = () => (
+  <Glyph><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" /></Glyph>
 );
 const GridIcon = () => (
   <Glyph><rect width="7" height="7" x="3" y="3" rx="1" /><rect width="7" height="7" x="14" y="3" rx="1" /><rect width="7" height="7" x="3" y="14" rx="1" /><rect width="7" height="7" x="14" y="14" rx="1" /></Glyph>
@@ -169,7 +173,10 @@ function HeaderActions({ signedIn = true }: { signedIn?: boolean }) {
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <Button variant="tertiary" size="sm">Se connecter</Button>
+        <Button variant="tertiary" size="sm">
+          <LogInIcon />
+          <span>Se connecter</span>
+        </Button>
       )}
     </AppHeaderActions>
   );
@@ -207,6 +214,176 @@ function MobileNavigation() {
   );
 }
 
+function ResponsiveSatelliteNavigationExample() {
+  const [activeId, setActiveId] = useState<(typeof navItems)[number]["id"]>("home");
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px)");
+    const updateMode = () => setIsDesktop(media.matches);
+
+    updateMode();
+    media.addEventListener("change", updateMode);
+    return () => media.removeEventListener("change", updateMode);
+  }, []);
+
+  const activeItem = navItems.find((item) => item.id === activeId) ?? navItems[0];
+
+  return (
+    <div className="min-h-screen bg-app-background pb-24 lg:pb-0">
+      <AppHeader>
+        <AppHeaderSection>
+          <BrandSwitcher />
+          <AppHeaderNav aria-label="Navigation responsive satellite" showFrom="lg">
+            {navItems.map((item) => (
+              <AppHeaderNavItem
+                key={item.id}
+                active={item.id === activeId}
+                onClick={() => setActiveId(item.id)}
+              >
+                <item.icon />
+                <span>{item.label}</span>
+              </AppHeaderNavItem>
+            ))}
+          </AppHeaderNav>
+        </AppHeaderSection>
+        <HeaderActions />
+      </AppHeader>
+
+      <main className="mx-auto max-w-4xl p-6 sm:p-10">
+        <div className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-10">
+          <span
+            data-testid="satellite-responsive-mode"
+            className="inline-flex rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-action-foreground"
+          >
+            {isDesktop ? "Onglets desktop" : "Tabbar mobile"}
+          </span>
+          <h1 className="mt-5 text-3xl font-semibold">{activeItem.label}</h1>
+          <p className="mt-3 max-w-2xl text-foreground/70">
+            Réduis ou agrandis la fenêtre. À 1024 px, la navigation satellite bascule
+            entre le header et la tabbar sans perdre l’onglet actif.
+          </p>
+        </div>
+      </main>
+
+      <MobileBottomNav aria-label="Navigation responsive mobile satellite" hideFrom="lg">
+        {navItems.map((item) => (
+          <MobileBottomNavItem
+            key={item.id}
+            active={item.id === activeId}
+            onClick={() => setActiveId(item.id)}
+          >
+            <item.icon />
+            <span className="truncate">{item.label}</span>
+          </MobileBottomNavItem>
+        ))}
+      </MobileBottomNav>
+    </div>
+  );
+}
+
+function PortalMobileNavigation() {
+  return (
+    <MobileBottomNav aria-label="Navigation mobile du portail" hideFrom="xl">
+      {portalNavItems.map((item, index) => (
+        <MobileBottomNavItem key={item.id} active={index === 0}>
+          <item.icon />
+          <span className="truncate">{item.label}</span>
+        </MobileBottomNavItem>
+      ))}
+    </MobileBottomNav>
+  );
+}
+
+function PortalBrand() {
+  return (
+    <AppHeaderBrand asChild className="px-0 hover:bg-transparent">
+      <a href="#applications" aria-label="Design Toolbox — Applications">
+        <AppHeaderBrandLogo
+          src={TOOLBOX_LOGO}
+          alt="Design Toolbox"
+          className="h-10 w-auto dark:hidden"
+        />
+        <AppHeaderBrandLogo
+          src={TOOLBOX_LOGO_DARK}
+          alt=""
+          className="hidden h-10 w-auto dark:block"
+        />
+      </a>
+    </AppHeaderBrand>
+  );
+}
+
+function ResponsivePortalNavigationExample() {
+  const [activeId, setActiveId] = useState<(typeof portalNavItems)[number]["id"]>(
+    "applications"
+  );
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1280px)");
+    const updateMode = () => setIsDesktop(media.matches);
+
+    updateMode();
+    media.addEventListener("change", updateMode);
+    return () => media.removeEventListener("change", updateMode);
+  }, []);
+
+  const activeItem = portalNavItems.find((item) => item.id === activeId) ?? portalNavItems[0];
+
+  return (
+    <div className="min-h-screen bg-app-background pb-24 xl:pb-0">
+      <AppHeader density="comfortable" contained>
+        <AppHeaderSection className="gap-6">
+          <PortalBrand />
+          <AppHeaderNav aria-label="Navigation responsive du portail" showFrom="xl">
+            {portalNavItems.map((item) => (
+              <AppHeaderNavItem
+                key={item.id}
+                active={item.id === activeId}
+                onClick={() => setActiveId(item.id)}
+              >
+                <item.icon />
+                <span>{item.label}</span>
+              </AppHeaderNavItem>
+            ))}
+          </AppHeaderNav>
+        </AppHeaderSection>
+        <HeaderActions />
+      </AppHeader>
+
+      <main className="mx-auto max-w-4xl p-6 sm:p-10">
+        <div className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-10">
+          <span
+            data-testid="responsive-mode"
+            className="inline-flex rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-action-foreground"
+          >
+            {isDesktop ? "Onglets desktop" : "Tabbar mobile"}
+          </span>
+          <h1 className="mt-5 text-3xl font-semibold">{activeItem.label}</h1>
+          <p className="mt-3 max-w-2xl text-foreground/70">
+            Réduis ou agrandis la fenêtre. À 1280 px, la navigation bascule sans perdre
+            l’onglet actif. Clique sur une destination pour simuler la navigation.
+          </p>
+        </div>
+      </main>
+
+      <MobileBottomNav aria-label="Navigation responsive mobile du portail" hideFrom="xl">
+        {portalNavItems.map((item) => (
+          <MobileBottomNavItem
+            key={item.id}
+            active={item.id === activeId}
+            onClick={() => setActiveId(item.id)}
+          >
+            <item.icon />
+            <span className="truncate">{item.label}</span>
+          </MobileBottomNavItem>
+        ))}
+      </MobileBottomNav>
+    </div>
+  );
+}
+
 const meta = {
   title: "Navigation/App Header",
   component: AppHeader,
@@ -232,17 +409,63 @@ export const SatelliteDesktop: Story = {
   )
 };
 
+export const SatelliteResponsiveNavigation: Story = {
+  render: () => <ResponsiveSatelliteNavigationExample />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const storyWindow = canvasElement.ownerDocument.defaultView;
+    const mode = canvas.getByTestId("satellite-responsive-mode");
+    const desktopNavigation = canvasElement.querySelector<HTMLElement>(
+      'nav[aria-label="Navigation responsive satellite"]'
+    );
+    const mobileNavigation = canvasElement.querySelector<HTMLElement>(
+      'nav[aria-label="Navigation responsive mobile satellite"]'
+    );
+
+    if (!desktopNavigation || !mobileNavigation) {
+      throw new Error("Les deux modes de navigation satellite sont requis");
+    }
+
+    if (storyWindow?.matchMedia("(min-width: 1024px)").matches) {
+      await expect(mode).toHaveTextContent("Onglets desktop");
+      expect(desktopNavigation).toBeVisible();
+      expect(mobileNavigation).not.toBeVisible();
+    } else {
+      await expect(mode).toHaveTextContent("Tabbar mobile");
+      expect(desktopNavigation).not.toBeVisible();
+      expect(mobileNavigation).toBeVisible();
+    }
+
+    const visibleTemplatesButton = canvas
+      .getAllByRole("button", { name: "Templates", hidden: true })
+      .find((element) => element.getClientRects().length > 0);
+
+    if (!visibleTemplatesButton) {
+      throw new Error("Le bouton Templates visible est requis");
+    }
+
+    await userEvent.click(visibleTemplatesButton);
+    await expect(canvas.getByRole("heading", { name: "Templates" })).toBeVisible();
+    await expect(visibleTemplatesButton).toHaveAttribute("aria-current", "page");
+  }
+};
+
 export const SignedOut: Story = {
   render: () => (
     <div className="min-h-screen bg-app-background">
       <SatelliteHeader signedIn={false} />
     </div>
-  )
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const loginButton = canvas.getByRole("button", { name: "Se connecter" });
+    await expect(loginButton.querySelector("svg")).toBeTruthy();
+  }
 };
 
 export const PortalDesktop: Story = {
   render: () => (
-    <div className="min-h-[180vh] bg-app-background">
+    <div className="min-h-[180vh] bg-app-background pb-24 xl:pb-0">
       <AppHeader
         density="comfortable"
         contained
@@ -251,20 +474,7 @@ export const PortalDesktop: Story = {
         data-testid="portal-header"
       >
         <AppHeaderSection className="gap-6">
-          <AppHeaderBrand asChild className="px-0 hover:bg-transparent">
-            <a href="#applications" aria-label="Design Toolbox — Applications">
-              <AppHeaderBrandLogo
-                src={TOOLBOX_LOGO}
-                alt="Design Toolbox"
-                className="h-10 w-auto dark:hidden"
-              />
-              <AppHeaderBrandLogo
-                src={TOOLBOX_LOGO_DARK}
-                alt=""
-                className="hidden h-10 w-auto dark:block"
-              />
-            </a>
-          </AppHeaderBrand>
+          <PortalBrand />
           <AppHeaderNav aria-label="Navigation du portail" showFrom="xl">
             {portalNavItems.map((item, index) => (
               <AppHeaderNavItem key={item.id} active={index === 0}>
@@ -294,18 +504,78 @@ export const PortalDesktop: Story = {
           </section>
         ))}
       </main>
+      <PortalMobileNavigation />
     </div>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const header = canvas.getByTestId("portal-header");
     const storyWindow = canvasElement.ownerDocument.defaultView;
+    const desktopNavigation = canvasElement.querySelector<HTMLElement>(
+      'nav[aria-label="Navigation du portail"]'
+    );
+    const mobileNavigation = canvasElement.querySelector<HTMLElement>(
+      'nav[aria-label="Navigation mobile du portail"]'
+    );
+
+    if (!desktopNavigation || !mobileNavigation) {
+      throw new Error("Les deux navigations responsive du portail sont requises");
+    }
+
+    if (storyWindow?.matchMedia("(min-width: 1280px)").matches) {
+      expect(desktopNavigation).toBeVisible();
+      expect(mobileNavigation).not.toBeVisible();
+    } else {
+      expect(desktopNavigation).not.toBeVisible();
+      expect(mobileNavigation).toBeVisible();
+    }
 
     expect(header).toHaveAttribute("data-collapsed", "false");
     storyWindow?.scrollTo({ top: 160, behavior: "instant" });
     await waitFor(() => expect(header).toHaveAttribute("data-collapsed", "true"));
     storyWindow?.scrollTo({ top: 0, behavior: "instant" });
     await waitFor(() => expect(header).toHaveAttribute("data-collapsed", "false"));
+  }
+};
+
+export const ResponsiveNavigation: Story = {
+  render: () => <ResponsivePortalNavigationExample />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const storyWindow = canvasElement.ownerDocument.defaultView;
+    const mode = canvas.getByTestId("responsive-mode");
+    const desktopNavigation = canvasElement.querySelector<HTMLElement>(
+      'nav[aria-label="Navigation responsive du portail"]'
+    );
+    const mobileNavigation = canvasElement.querySelector<HTMLElement>(
+      'nav[aria-label="Navigation responsive mobile du portail"]'
+    );
+
+    if (!desktopNavigation || !mobileNavigation) {
+      throw new Error("Les deux modes de navigation sont requis");
+    }
+
+    if (storyWindow?.matchMedia("(min-width: 1280px)").matches) {
+      await expect(mode).toHaveTextContent("Onglets desktop");
+      expect(desktopNavigation).toBeVisible();
+      expect(mobileNavigation).not.toBeVisible();
+    } else {
+      await expect(mode).toHaveTextContent("Tabbar mobile");
+      expect(desktopNavigation).not.toBeVisible();
+      expect(mobileNavigation).toBeVisible();
+    }
+
+    const visibleProjectsButton = canvas
+      .getAllByRole("button", { name: "Projets", hidden: true })
+      .find((element) => element.getClientRects().length > 0);
+
+    if (!visibleProjectsButton) {
+      throw new Error("Le bouton Projets visible est requis");
+    }
+
+    await userEvent.click(visibleProjectsButton);
+    await expect(canvas.getByRole("heading", { name: "Projets" })).toBeVisible();
+    await expect(visibleProjectsButton).toHaveAttribute("aria-current", "page");
   }
 };
 
@@ -324,7 +594,22 @@ export const Mobile: Story = {
       </main>
       <MobileNavigation />
     </div>
-  )
+  ),
+  play: async ({ canvasElement }) => {
+    const desktopNavigation = canvasElement.querySelector<HTMLElement>(
+      'nav[aria-label="Navigation principale"]'
+    );
+    const mobileNavigation = canvasElement.querySelector<HTMLElement>(
+      'nav[aria-label="Navigation mobile"]'
+    );
+
+    if (!desktopNavigation || !mobileNavigation) {
+      throw new Error("Les deux navigations responsive sont requises");
+    }
+
+    expect(desktopNavigation).not.toBeVisible();
+    expect(mobileNavigation).toBeVisible();
+  }
 };
 
 export const ApplicationSwitcher: Story = {
