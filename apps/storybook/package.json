@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@pgianni/toolbox-react": "file:../../packages/react",
-    "@pgianni/toolbox-theme": "^0.1.1",
-    "@pgianni/toolbox-tokens": "^0.1.0",
+    "@pgianni/toolbox-theme": "file:../../packages/theme",
+    "@pgianni/toolbox-tokens": "file:../../packages/tokens",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

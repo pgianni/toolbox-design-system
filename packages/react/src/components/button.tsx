@@ -12,20 +12,21 @@ export const buttonVariants = cva(
         default: "bg-primary text-primary-foreground hover:bg-primary/90 active:translate-y-0.5",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 active:translate-y-0.5",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80 active:translate-y-0.5",
+          "border border-action-foreground bg-secondary text-action-foreground hover:bg-secondary/80 hover:text-action-foreground active:translate-y-0.5",
         tertiary:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground active:translate-y-0.5",
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground active:translate-y-0.5",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground active:translate-y-0.5",
+          "text-action-foreground hover:bg-accent hover:text-action-foreground active:translate-y-0.5",
         link: "text-primary underline-offset-4 hover:underline",
         gradient:
           "bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700 active:translate-y-0.5",
         brand: "rounded-full bg-primary text-primary-foreground hover:bg-primary/90 active:translate-y-0.5",
         purple: "rounded-full bg-primary text-primary-foreground hover:bg-primary/90 active:translate-y-0.5",
         save: "rounded-full bg-primary text-primary-foreground hover:bg-primary/90 active:translate-y-0.5",
-        "brand-outline": "rounded-full border border-primary/70 bg-transparent text-primary hover:bg-primary/10 dark:hover:bg-primary/20",
+        "brand-outline":
+          "border border-action-foreground bg-secondary text-action-foreground hover:bg-secondary/80 hover:text-action-foreground active:translate-y-0.5",
         "brand-ghost": "rounded-full text-primary hover:bg-primary/10 dark:hover:bg-primary/20"
       },
       size: {

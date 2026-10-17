@@ -1,6 +1,6 @@
 {
   "name": "@pgianni/toolbox-theme",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": false,
   "files": [
     "src"
@@ -10,7 +10,7 @@
     "./tailwind-preset": "./src/tailwind-preset.cjs"
   },
   "dependencies": {
-    "@pgianni/toolbox-tokens": "0.1.0"
+    "@pgianni/toolbox-tokens": "0.2.0"
   },
   "peerDependencies": {
     "tailwindcss": "^3.4.0"

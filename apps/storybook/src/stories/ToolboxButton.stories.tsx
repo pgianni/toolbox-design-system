@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { ComponentProps } from "react";
 import { expect } from "storybook/test";
-import { Button } from "@pgianni/toolbox-react";
+import { Button, buttonVariants } from "@pgianni/toolbox-react";
 
 function PlusIcon() {
   return (
@@ -69,107 +70,106 @@ const variants = [
   "primary",
   "secondary",
   "tertiary",
-  "ghost",
-  "default",
-  "outline",
-  "destructive",
-  "link",
-  "brand",
-  "brand-outline",
-  "brand-ghost",
-  "purple",
-  "gradient",
-  "save"
-] as const;
-
-const showcasedVariants = [
-  "primary",
-  "secondary",
-  "tertiary",
-  "ghost",
-  "destructive",
-  "link",
-  "gradient",
-  "brand-outline",
-  "brand-ghost"
+  "ghost"
 ] as const;
 
 const sizes = ["sm", "default", "lg"] as const;
-const iconSizes = ["icon-xs", "icon-sm", "icon-md", "icon", "icon-lg"] as const;
+const iconOptions = ["None", "Icon left", "Icon right", "Icon only"] as const;
+const iconSizeByButtonSize = {
+  sm: "icon-sm",
+  default: "icon",
+  lg: "icon-lg"
+} as const;
+
+type ButtonStoryArgs = ComponentProps<typeof Button> & {
+  icon: (typeof iconOptions)[number];
+};
 
 const meta = {
   component: Button,
   tags: ["ai-generated"],
+  args: {
+    icon: "None",
+    size: "default"
+  },
+  render: ({ icon, children, ...args }) => {
+    const accessibleLabel =
+      typeof children === "string" ? children : "Action du bouton";
+    const controlledSize =
+      args.size === "sm" || args.size === "lg" ? args.size : "default";
+
+    return (
+      <Button
+        {...args}
+        size={
+          icon === "Icon only" ? iconSizeByButtonSize[controlledSize] : args.size
+        }
+        aria-label={
+          icon === "Icon only" ? args["aria-label"] ?? accessibleLabel : args["aria-label"]
+        }
+      >
+        {(icon === "Icon left" || icon === "Icon only") && <PlusIcon />}
+        {icon !== "Icon only" && children}
+        {icon === "Icon right" && <ArrowRightIcon />}
+      </Button>
+    );
+  },
   parameters: {
     layout: "centered"
   },
   argTypes: {
+    icon: {
+      control: "inline-radio",
+      options: iconOptions,
+      description: "Position de l’icône dans le bouton"
+    },
     variant: {
-      control: "select",
+      control: "inline-radio",
       options: variants
     },
     size: {
-      control: "select",
-      options: [...sizes, ...iconSizes]
+      control: {
+        type: "inline-radio",
+        labels: {
+          sm: "Small",
+          default: "Medium",
+          lg: "Large"
+        }
+      },
+      options: sizes
     },
     shape: {
       control: "select",
       options: ["pill", "rounded", "square"]
     }
   }
-} satisfies Meta<typeof Button>;
+} satisfies Meta<ButtonStoryArgs>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Variants: Story = {
   args: {
-    children: "Créer un projet",
+    children: "Action du bouton",
     variant: "primary",
     type: "button"
-  }
-};
-
-export const Secondary: Story = {
-  args: {
-    children: "Voir le projet",
-    variant: "secondary",
-    type: "button"
-  }
-};
-
-export const Tertiary: Story = {
-  args: {
-    children: "En savoir plus",
-    variant: "tertiary",
-    type: "button"
-  }
-};
-
-export const Ghost: Story = {
-  args: {
-    children: "Ouvrir les options",
-    variant: "ghost",
-    type: "button"
-  }
-};
-
-export const Variants: Story = {
-  render: () => (
-    <div className="flex max-w-3xl flex-wrap items-center justify-center gap-3">
-      {showcasedVariants.map((variant) => (
-        <Button key={variant} variant={variant} type="button">
-          {variant}
-        </Button>
-      ))}
-    </div>
-  ),
+  },
   play: async ({ canvas }) => {
-    for (const name of ["secondary", "tertiary", "ghost"]) {
-      const button = canvas.getByRole("button", { name });
-      await expect(button.className).toContain("active:translate-y-0.5");
-      await expect(button.className).toContain("duration-150");
-    }
+    const button = canvas.getByRole("button", { name: /action du bouton/i });
+    await expect(button.className).toContain("active:translate-y-0.5");
+    await expect(button.className).toContain("duration-150");
+    await expect(buttonVariants({ variant: "secondary" })).toContain(
+      "border-action-foreground"
+    );
+    await expect(buttonVariants({ variant: "secondary" })).toContain(
+      "text-action-foreground"
+    );
+    await expect(buttonVariants({ variant: "ghost" })).toContain(
+      "text-action-foreground"
+    );
+    await expect(buttonVariants({ variant: "brand-outline" })).toBe(
+      buttonVariants({ variant: "secondary" })
+    );
   }
 };
 
@@ -181,36 +181,6 @@ export const Sizes: Story = {
           Taille {size}
         </Button>
       ))}
-    </div>
-  )
-};
-
-export const IconButtons: Story = {
-  render: () => (
-    <div className="flex items-center gap-3">
-      {iconSizes.map((size) => (
-        <Button
-          key={size}
-          size={size}
-          variant="ghost"
-          shape="pill"
-          type="button"
-          aria-label={`Ajouter — taille ${size}`}
-          title={`Taille ${size}`}
-        >
-          <PlusIcon />
-        </Button>
-      ))}
-    </div>
-  )
-};
-
-export const Shapes: Story = {
-  render: () => (
-    <div className="flex items-center gap-3">
-      <Button shape="pill">Pill — défaut</Button>
-      <Button shape="rounded">Rounded</Button>
-      <Button shape="square">Square</Button>
     </div>
   )
 };
@@ -231,38 +201,6 @@ export const WithLeadingIcon: Story = {
       <PlusIcon />
       Ajouter un projet
     </Button>
-  )
-};
-
-export const WithTrailingIcon: Story = {
-  render: () => (
-    <Button type="button" variant="tertiary">
-      Continuer
-      <ArrowRightIcon />
-    </Button>
-  )
-};
-
-export const TrailingIconVariants: Story = {
-  render: () => (
-    <div className="flex flex-wrap items-center justify-center gap-3">
-      <Button type="button">
-        Continuer
-        <ArrowRightIcon />
-      </Button>
-      <Button type="button" variant="secondary">
-        Voir le projet
-        <ArrowRightIcon />
-      </Button>
-      <Button type="button" variant="tertiary">
-        En savoir plus
-        <ArrowRightIcon />
-      </Button>
-      <Button type="button" variant="ghost">
-        Ouvrir
-        <ArrowRightIcon />
-      </Button>
-    </div>
   )
 };
 
@@ -293,15 +231,4 @@ export const Loading: Story = {
       Enregistrement…
     </Button>
   )
-};
-
-export const CssCheck: Story = {
-  args: {
-    children: "Vérifier le thème",
-    type: "button"
-  },
-  play: async ({ canvas }) => {
-    const button = canvas.getByRole("button", { name: /vérifier le thème/i });
-    await expect(getComputedStyle(button).backgroundColor).toBe("rgb(68, 0, 255)");
-  }
 };

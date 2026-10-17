@@ -1,5 +1,14 @@
 # @pgianni/toolbox-react
 
+## 0.4.1
+
+### Patch Changes
+
+- Use the primary violet color for secondary button borders, labels, and icons.
+  Merge the legacy `brand-outline` appearance into `secondary` while keeping it
+  as a backward-compatible alias. Secondary and ghost buttons share the same
+  accessible violet action color in light and dark modes.
+
 ## 0.4.0
 
 ### Minor Changes
