@@ -1,5 +1,11 @@
 # @pgianni/toolbox-react
 
+## 0.5.0
+
+### Minor Changes
+
+- affe958: Add composable desktop and mobile application header primitives, including the shared Toolbox application switcher and bottom navigation.
+
 ## 0.4.1
 
 ### Patch Changes
