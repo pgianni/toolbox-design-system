@@ -92,4 +92,33 @@ export {
   type SwitchProps
 } from "./components/switch";
 export { Toaster, toast, type ToasterProps } from "./components/toaster";
+export {
+  AppHeader,
+  AppHeaderSection,
+  AppHeaderBrand,
+  AppHeaderBrandLogo,
+  AppHeaderBrandName,
+  AppHeaderNav,
+  AppHeaderNavItem,
+  AppHeaderActions,
+  AppSwitcher,
+  MobileBottomNav,
+  MobileBottomNavItem,
+  appHeaderVariants,
+  appHeaderNavItemVariants,
+  mobileBottomNavItemVariants,
+  type AppHeaderProps,
+  type AppHeaderSectionProps,
+  type AppHeaderBrandProps,
+  type AppHeaderBrandLogoProps,
+  type AppHeaderBrandNameProps,
+  type AppHeaderNavProps,
+  type AppHeaderNavItemProps,
+  type AppHeaderActionsProps,
+  type AppHeaderBreakpoint,
+  type AppSwitcherApplication,
+  type AppSwitcherProps,
+  type MobileBottomNavProps,
+  type MobileBottomNavItemProps
+} from "./components/app-header";
 export { cn } from "./lib";
