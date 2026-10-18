@@ -118,3 +118,42 @@ export {
   type MobileBottomNavItemProps
 } from "./components/app-header";
 export { cn } from "./lib";
+export {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent
+} from "./components/accordion";
+export {
+  AlertDialog,
+  AlertDialogPortal,
+  AlertDialogOverlay,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+  type AlertDialogActionProps,
+  type AlertDialogCancelProps
+} from "./components/alert-dialog";
+export { AspectRatio } from "./components/aspect-ratio";
+export { Avatar, AvatarImage, AvatarFallback } from "./components/avatar";
+export {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+  useCarousel,
+  type CarouselApi,
+  type CarouselButtonProps
+} from "./components/carousel";
+export {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent
+} from "./components/collapsible";
+export { RadioGroup, RadioGroupItem } from "./components/radio-group";
