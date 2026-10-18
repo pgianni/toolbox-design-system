@@ -3,6 +3,18 @@ export { Input, type InputProps } from "./components/input";
 export { Textarea, type TextareaProps } from "./components/textarea";
 export { Label, labelVariants, type LabelProps } from "./components/label";
 export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton
+} from "./components/select";
+export {
   Card,
   CardHeader,
   CardFooter,
