@@ -210,7 +210,7 @@ const AppHeaderNav = React.forwardRef<HTMLElement, AppHeaderNavProps>(
     <nav
       ref={ref}
       className={cn(
-        "hidden min-w-0 items-center gap-1",
+        "hidden min-w-0 items-center",
         desktopBreakpointClassNames[showFrom],
         className
       )}

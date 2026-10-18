@@ -5,7 +5,8 @@ import { cn } from "../lib";
 import {
   navItemActiveStateClassName,
   navItemBaseClassName,
-  navItemPillClassName
+  navItemPillClassName,
+  navItemPressClassName
 } from "./nav-item-styles";
 
 const tabsListVariants = cva(
@@ -13,9 +14,9 @@ const tabsListVariants = cva(
   {
     variants: {
       variant: {
-        default: "h-10 justify-center gap-1 rounded-lg bg-muted p-1",
-        page: "h-12 max-w-full justify-start gap-1 overflow-x-auto bg-transparent p-0",
-        view: "h-auto justify-center gap-1 rounded-xl border border-border bg-background p-1"
+        default: "h-10 justify-center rounded-lg bg-muted p-1",
+        page: "h-12 max-w-full justify-start overflow-x-auto bg-transparent p-0",
+        view: "h-auto justify-center rounded-2xl border border-border bg-background p-1"
       }
     },
     defaultVariants: {
@@ -30,7 +31,10 @@ const tabsTriggerVariants = cva(
     variants: {
       variant: {
         default:
-          "h-8 rounded-md px-3 hover:bg-background/60 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+          cn(
+            "h-8 rounded-md px-3 hover:bg-background/60 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+            navItemPressClassName
+          ),
         page:
           "h-12 rounded-none border-t-2 border-transparent px-3 hover:bg-accent data-[state=active]:border-action-foreground data-[state=active]:bg-background data-[state=active]:text-action-foreground",
         view: cn(navItemPillClassName, navItemActiveStateClassName)
