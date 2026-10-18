@@ -3,39 +3,47 @@ import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import { type VariantProps } from "class-variance-authority";
 import { cn } from "../lib";
 import { buttonVariants } from "./button";
+import {
+  dialogContentVariants,
+  dialogDescriptionClassName,
+  dialogFooterClassName,
+  dialogHeaderClassName,
+  dialogOverlayClassName,
+  dialogTitleClassName
+} from "./dialog";
 
 const AlertDialog = AlertDialogPrimitive.Root;
 const AlertDialogTrigger = AlertDialogPrimitive.Trigger;
 const AlertDialogPortal = AlertDialogPrimitive.Portal;
 
-// Overlay and surface match DialogOverlay / DialogContent.
+// Overlay, surface, sizes and text styles come from Dialog.
 const AlertDialogOverlay = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Overlay
     ref={ref}
-    className={cn(
-      "fixed inset-0 z-50 bg-black/60 backdrop-blur-[2px] transition-opacity duration-200 data-[state=closed]:opacity-0 data-[state=open]:opacity-100",
-      className
-    )}
+    className={cn(dialogOverlayClassName, className)}
     {...props}
   />
 ));
 AlertDialogOverlay.displayName = AlertDialogPrimitive.Overlay.displayName;
 
+export interface AlertDialogContentProps
+  extends React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>,
+    Pick<VariantProps<typeof dialogContentVariants>, "size"> {
+  overlayClassName?: string;
+}
+
 const AlertDialogContent = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>
->(({ className, ...props }, ref) => (
+  AlertDialogContentProps
+>(({ className, overlayClassName, size = "sm", ...props }, ref) => (
   <AlertDialogPortal>
-    <AlertDialogOverlay />
+    <AlertDialogOverlay className={overlayClassName} />
     <AlertDialogPrimitive.Content
       ref={ref}
-      className={cn(
-        "fixed left-1/2 top-1/2 z-50 grid max-h-[calc(100vh-2rem)] w-[calc(100%-2rem)] max-w-[28rem] -translate-x-1/2 -translate-y-1/2 gap-4 overflow-y-auto rounded-lg border bg-background p-6 text-foreground shadow-lg outline-none transition duration-200 data-[state=closed]:scale-95 data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100",
-        className
-      )}
+      className={cn(dialogContentVariants({ size, variant: "default" }), className)}
       {...props}
     />
   </AlertDialogPortal>
@@ -48,7 +56,7 @@ function AlertDialogHeader({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("flex flex-col gap-1.5 text-center sm:text-left", className)}
+      className={cn(dialogHeaderClassName, className)}
       {...props}
     />
   );
@@ -61,10 +69,7 @@ function AlertDialogFooter({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn(
-        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        className
-      )}
+      className={cn(dialogFooterClassName, className)}
       {...props}
     />
   );
@@ -77,7 +82,7 @@ const AlertDialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Title
     ref={ref}
-    className={cn("text-lg font-semibold leading-none tracking-tight", className)}
+    className={cn(dialogTitleClassName, className)}
     {...props}
   />
 ));
@@ -89,7 +94,7 @@ const AlertDialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Description
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
+    className={cn(dialogDescriptionClassName, className)}
     {...props}
   />
 ));
@@ -121,7 +126,7 @@ export interface AlertDialogCancelProps
 const AlertDialogCancel = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Cancel>,
   AlertDialogCancelProps
->(({ className, variant = "tertiary", size, shape, ...props }, ref) => (
+>(({ className, variant = "outline", size, shape, ...props }, ref) => (
   <AlertDialogPrimitive.Cancel
     ref={ref}
     className={cn(buttonVariants({ variant, size, shape }), className)}

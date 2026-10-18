@@ -39,6 +39,16 @@ const dialogContentVariants = cva(
   }
 );
 
+// Shared with AlertDialog so both overlays look the same.
+export const dialogOverlayClassName =
+  "fixed inset-0 z-50 bg-black/60 backdrop-blur-[2px] transition-opacity duration-200 data-[state=closed]:opacity-0 data-[state=open]:opacity-100";
+export const dialogHeaderClassName = "flex flex-col gap-1.5 text-center sm:text-left";
+export const dialogFooterClassName =
+  "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end";
+export const dialogTitleClassName =
+  "text-lg font-semibold leading-none tracking-tight";
+export const dialogDescriptionClassName = "text-sm text-muted-foreground";
+
 type DialogLayoutContextValue = {
   variant: NonNullable<VariantProps<typeof dialogContentVariants>["variant"]>;
   fixedSections: boolean;
@@ -58,10 +68,7 @@ const DialogOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Overlay
     ref={ref}
-    className={cn(
-      "fixed inset-0 z-50 bg-black/60 backdrop-blur-[2px] transition-opacity duration-200 data-[state=closed]:opacity-0 data-[state=open]:opacity-100",
-      className
-    )}
+    className={cn(dialogOverlayClassName, className)}
     {...props}
   />
 ));
@@ -140,7 +147,7 @@ function DialogHeader({
   return (
     <div
       className={cn(
-        "flex flex-col gap-1.5 text-center sm:text-left",
+        dialogHeaderClassName,
         fixedSections && "shrink-0",
         variant === "sectioned" && "border-b px-6 py-5 pr-16",
         className
@@ -182,7 +189,7 @@ function DialogFooter({
   return (
     <div
       className={cn(
-        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+        dialogFooterClassName,
         fixedSections && "shrink-0",
         variant === "sectioned" && "border-t px-6 py-4",
         className
@@ -199,7 +206,7 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn("text-lg font-semibold leading-none tracking-tight", className)}
+    className={cn(dialogTitleClassName, className)}
     {...props}
   />
 ));
@@ -211,7 +218,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
+    className={cn(dialogDescriptionClassName, className)}
     {...props}
   />
 ));

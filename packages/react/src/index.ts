@@ -136,6 +136,7 @@ export {
   AlertDialogDescription,
   AlertDialogAction,
   AlertDialogCancel,
+  type AlertDialogContentProps,
   type AlertDialogActionProps,
   type AlertDialogCancelProps
 } from "./components/alert-dialog";
