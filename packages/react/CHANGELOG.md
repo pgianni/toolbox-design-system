@@ -1,5 +1,21 @@
 # @pgianni/toolbox-react
 
+## 0.6.0
+
+### Minor Changes
+
+- a93d1f2: Align Tabs with AppHeaderNav: triggers share the same base styles (typography,
+  16px icons, focus ring). The `view` variant now uses the AppHeaderNavItem pill
+  and `primary`/`action-foreground` tokens for its active state instead of
+  hard-coded blue, so it follows dark mode. The `page` variant's active indicator
+  and text use `action-foreground`.
+  
+  Items in AppHeaderNav and all Tabs lists no longer have gaps between them,
+  the `view` container uses a larger radius, and `default` triggers get the
+  same press effect as the nav.
+- 10b4586: AppHeader hides its bottom border while the page is at the top and shows it
+  once the page scrolls. The header exposes the state as `data-scrolled`.
+
 ## 0.5.1
 
 ### Patch Changes
