@@ -50,22 +50,6 @@ export {
   type DialogBodyProps
 } from "./components/dialog";
 export {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetOverlay,
-  SheetPortal,
-  SheetTitle,
-  SheetTrigger,
-  sheetVariants,
-  type SheetOverlayProps,
-  type SheetContentProps,
-  type SheetSize
-} from "./components/sheet";
-export {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
