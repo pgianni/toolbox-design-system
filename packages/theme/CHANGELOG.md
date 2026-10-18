@@ -1,5 +1,12 @@
 # @pgianni/toolbox-theme
 
+## 0.4.0
+
+### Minor Changes
+
+- 61eeb18: Add `side-panel-in`/`side-panel-out` and `fade-in`/`fade-out` keyframes and
+  animations to the Tailwind preset, used by `SidePanel`.
+
 ## 0.3.0
 
 ### Minor Changes
