@@ -72,13 +72,33 @@ module.exports = {
         "collapsible-up": {
           from: { height: "var(--radix-collapsible-content-height)" },
           to: { height: "0" }
+        },
+        "side-panel-in": {
+          from: { transform: "translateX(calc(100% + 12px))" },
+          to: { transform: "translateX(0)" }
+        },
+        "side-panel-out": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(100% + 12px))" }
+        },
+        "fade-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" }
+        },
+        "fade-out": {
+          from: { opacity: "1" },
+          to: { opacity: "0" }
         }
       },
       animation: {
         "accordion-down": "accordion-down 200ms ease-out",
         "accordion-up": "accordion-up 200ms ease-out",
         "collapsible-down": "collapsible-down 200ms ease-out",
-        "collapsible-up": "collapsible-up 200ms ease-out"
+        "collapsible-up": "collapsible-up 200ms ease-out",
+        "side-panel-in": "side-panel-in 300ms cubic-bezier(0.32, 0.72, 0, 1)",
+        "side-panel-out": "side-panel-out 300ms cubic-bezier(0.32, 0.72, 0, 1)",
+        "fade-in": "fade-in 200ms ease-out",
+        "fade-out": "fade-out 200ms ease-out"
       }
     }
   }

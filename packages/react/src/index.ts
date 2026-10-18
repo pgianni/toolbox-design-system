@@ -158,3 +158,24 @@ export {
   CollapsibleContent
 } from "./components/collapsible";
 export { RadioGroup, RadioGroupItem } from "./components/radio-group";
+export { Checkbox } from "./components/checkbox";
+export {
+  SidePanel,
+  SidePanelTrigger,
+  SidePanelClose,
+  SidePanelPortal,
+  SidePanelContent,
+  SidePanelHeader,
+  SidePanelBody,
+  SidePanelFooter,
+  SidePanelTitle,
+  SidePanelDescription,
+  sidePanelContentVariants,
+  type SidePanelProps,
+  type SidePanelContentProps
+} from "./components/side-panel";
+export {
+  AppFooter,
+  type AppFooterProps,
+  type AppFooterApplication
+} from "./components/app-footer";
