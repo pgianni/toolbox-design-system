@@ -1,5 +1,36 @@
 # @pgianni/toolbox-react
 
+## 0.7.0
+
+### Minor Changes
+
+- 1d2c469: Add `Select`, built on Radix Select: `Select`, `SelectTrigger`, `SelectValue`,
+  `SelectContent`, `SelectItem`, `SelectGroup`, `SelectLabel`, `SelectSeparator`,
+  `SelectScrollUpButton` and `SelectScrollDownButton`. The trigger matches
+  `Input` (height, border, focus ring) and the list uses the same surface as
+  `DropdownMenuContent`; the selected item uses `action-foreground`.
+- 94e98bf: Add components ported from UX Method: `Accordion`, `AlertDialog`, `Avatar`,
+  `RadioGroup`, `Collapsible`, `Carousel` (Embla) and `AspectRatio`. They use
+  inline icons instead of lucide-react, the toolbox tokens (`action-foreground`
+  for checked and hover states) and the same overlay and surface as `Dialog`.
+  `AlertDialogAction` and `AlertDialogCancel` accept the `Button` variants.
+  `Accordion` and `CollapsibleContent` animate with the keyframes from
+  `@pgianni/toolbox-theme`.
+- 3043b24: `AlertDialog` now shares its styles with `Dialog`: same overlay, surface,
+  header, footer, title and description classes. `AlertDialogContent` accepts
+  Dialog's `size` (default `sm`) and an `overlayClassName`, and
+  `AlertDialogCancel` defaults to the `outline` button variant like Dialog's
+  cancel buttons.
+- b7ac2d3: Tabs `default` now uses the same pill style as AppHeaderNav (bordered
+  container, `primary`/`action-foreground` active state) instead of the grey
+  segmented control. `variant="view"` renders identically and is kept as an
+  alias.
+- 393f08b: **Breaking:** remove the Sheet component and its exports (`Sheet`,
+  `SheetTrigger`, `SheetClose`, `SheetPortal`, `SheetOverlay`, `SheetContent`,
+  `SheetHeader`, `SheetFooter`, `SheetTitle`, `SheetDescription`,
+  `sheetVariants` and the `SheetOverlayProps`, `SheetContentProps`, `SheetSize`
+  types). Use `Dialog` instead.
+
 ## 0.6.0
 
 ### Minor Changes

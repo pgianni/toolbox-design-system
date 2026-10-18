@@ -1,5 +1,12 @@
 # @pgianni/toolbox-theme
 
+## 0.3.0
+
+### Minor Changes
+
+- 94e98bf: Add `accordion-down`/`accordion-up` and `collapsible-down`/`collapsible-up`
+  keyframes and animations to the Tailwind preset.
+
 ## 0.2.0
 
 ### Minor Changes
