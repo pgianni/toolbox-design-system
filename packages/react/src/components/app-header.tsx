@@ -16,7 +16,7 @@ import {
 } from "./nav-item-styles";
 
 export const appHeaderVariants = cva(
-  "sticky top-0 z-40 w-full border-b border-border bg-card/95 text-foreground backdrop-blur supports-[backdrop-filter]:bg-card/90",
+  "sticky top-0 z-40 w-full border-b border-border bg-card/95 transition-[border-color] duration-200 motion-reduce:transition-none text-foreground backdrop-blur supports-[backdrop-filter]:bg-card/90",
   {
     variants: {
       density: {
@@ -73,29 +73,31 @@ const AppHeader = React.forwardRef<HTMLElement, AppHeaderProps>(
     },
     ref
   ) => {
-    const [collapsed, setCollapsed] = React.useState(false);
+    const [scrollY, setScrollY] = React.useState(0);
+    const scrolled = scrollY > 0;
+    const collapsed = collapseOnScroll && scrollY > collapseOffset;
 
     React.useEffect(() => {
-      if (!collapseOnScroll) {
-        setCollapsed(false);
-        return;
-      }
-
-      const updateCollapsedState = () => {
-        setCollapsed(window.scrollY > collapseOffset);
+      const updateScrollState = () => {
+        setScrollY(window.scrollY);
       };
 
-      updateCollapsedState();
-      window.addEventListener("scroll", updateCollapsedState, { passive: true });
+      updateScrollState();
+      window.addEventListener("scroll", updateScrollState, { passive: true });
 
-      return () => window.removeEventListener("scroll", updateCollapsedState);
-    }, [collapseOffset, collapseOnScroll]);
+      return () => window.removeEventListener("scroll", updateScrollState);
+    }, []);
 
     return (
       <header
         ref={ref}
+        data-scrolled={scrolled}
         data-collapsed={collapseOnScroll ? collapsed : undefined}
-        className={cn(appHeaderVariants({ density }), className)}
+        className={cn(
+          appHeaderVariants({ density }),
+          !scrolled && "border-transparent",
+          className
+        )}
         {...props}
       >
         <div
