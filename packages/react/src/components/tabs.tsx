@@ -2,15 +2,20 @@ import * as React from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib";
+import {
+  navItemActiveStateClassName,
+  navItemBaseClassName,
+  navItemPillClassName
+} from "./nav-item-styles";
 
 const tabsListVariants = cva(
   "inline-flex items-center text-muted-foreground",
   {
     variants: {
       variant: {
-        default: "h-10 justify-center rounded-md bg-muted p-1",
-        page: "h-12 max-w-full justify-start overflow-x-auto bg-transparent p-0",
-        view: "h-auto justify-center rounded-lg border border-border bg-background p-1"
+        default: "h-10 justify-center gap-1 rounded-lg bg-muted p-1",
+        page: "h-12 max-w-full justify-start gap-1 overflow-x-auto bg-transparent p-0",
+        view: "h-auto justify-center gap-1 rounded-xl border border-border bg-background p-1"
       }
     },
     defaultVariants: {
@@ -20,16 +25,15 @@ const tabsListVariants = cva(
 );
 
 const tabsTriggerVariants = cva(
-  "inline-flex shrink-0 items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  cn(navItemBaseClassName, "ring-offset-background"),
   {
     variants: {
       variant: {
         default:
-          "rounded-sm px-3 py-1.5 hover:bg-background/50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+          "h-8 rounded-md px-3 hover:bg-background/60 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
         page:
-          "h-12 rounded-none border-t-2 border-transparent px-3 shadow-none hover:bg-muted/60 data-[state=active]:border-primary data-[state=active]:bg-background data-[state=active]:text-foreground",
-        view:
-          "gap-2 rounded-md px-3 py-2 text-muted-foreground transition-all hover:text-foreground [&_svg]:size-4 [&_svg]:shrink-0 data-[state=active]:bg-[#DBEAFE] data-[state=active]:text-blue-700 data-[state=active]:shadow-none data-[state=active]:hover:text-blue-700"
+          "h-12 rounded-none border-t-2 border-transparent px-3 hover:bg-accent data-[state=active]:border-action-foreground data-[state=active]:bg-background data-[state=active]:text-action-foreground",
+        view: cn(navItemPillClassName, navItemActiveStateClassName)
       }
     },
     defaultVariants: {

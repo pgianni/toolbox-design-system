@@ -9,6 +9,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "./dropdown-menu";
+import {
+  navItemActiveClassName,
+  navItemBaseClassName,
+  navItemPillClassName
+} from "./nav-item-styles";
 
 export const appHeaderVariants = cva(
   "sticky top-0 z-40 w-full border-b border-border bg-card/95 text-foreground backdrop-blur supports-[backdrop-filter]:bg-card/90",
@@ -216,11 +221,15 @@ const AppHeaderNav = React.forwardRef<HTMLElement, AppHeaderNavProps>(
 AppHeaderNav.displayName = "AppHeaderNav";
 
 export const appHeaderNavItemVariants = cva(
-  "relative inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-transparent px-3 text-sm font-medium text-muted-foreground transition-[color,background-color,transform] duration-150 hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:translate-y-0.5 motion-reduce:transform-none [&_svg]:h-4 [&_svg]:w-4 [&_svg]:shrink-0",
+  cn(
+    "relative border border-transparent",
+    navItemBaseClassName,
+    navItemPillClassName
+  ),
   {
     variants: {
       active: {
-        true: "bg-primary/10 text-action-foreground hover:bg-primary/15 hover:text-action-foreground",
+        true: navItemActiveClassName,
         false: ""
       }
     },

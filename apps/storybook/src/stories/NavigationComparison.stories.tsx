@@ -1,0 +1,85 @@
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { useState } from "react";
+import {
+  AppHeaderNav,
+  AppHeaderNavItem,
+  Tabs,
+  TabsList,
+  TabsTrigger
+} from "@pgianni/toolbox-react";
+
+const items = ["Accueil", "Projets", "Templates", "Assistant"] as const;
+
+const meta = {
+  title: "Navigation/Comparaison",
+  parameters: {
+    layout: "centered"
+  }
+} satisfies Meta;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+function Row({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="grid grid-cols-[10rem_1fr] items-center gap-6">
+      <span className="text-sm text-muted-foreground">{label}</span>
+      <div>{children}</div>
+    </div>
+  );
+}
+
+function TabsRow({ variant }: { variant: "default" | "page" | "view" }) {
+  return (
+    <Tabs variant={variant} defaultValue={items[0]}>
+      <TabsList aria-label={`Tabs ${variant}`}>
+        {items.map((item) => (
+          <TabsTrigger key={item} value={item}>
+            {item}
+          </TabsTrigger>
+        ))}
+      </TabsList>
+    </Tabs>
+  );
+}
+
+function Comparison() {
+  const [activeItem, setActiveItem] = useState<(typeof items)[number]>(items[0]);
+
+  return (
+    <div className="flex flex-col gap-6 rounded-xl border border-border bg-card p-6 text-foreground">
+      <Row label="AppHeaderNav">
+        <AppHeaderNav showFrom="sm" aria-label="Navigation principale">
+          {items.map((item) => (
+            <AppHeaderNavItem
+              key={item}
+              active={activeItem === item}
+              onClick={() => setActiveItem(item)}
+            >
+              {item}
+            </AppHeaderNavItem>
+          ))}
+        </AppHeaderNav>
+      </Row>
+      <Row label='Tabs "view"'>
+        <TabsRow variant="view" />
+      </Row>
+      <Row label='Tabs "default"'>
+        <TabsRow variant="default" />
+      </Row>
+      <Row label='Tabs "page"'>
+        <TabsRow variant="page" />
+      </Row>
+    </div>
+  );
+}
+
+export const Light: Story = {
+  globals: { theme: "light" },
+  render: () => <Comparison />
+};
+
+export const Dark: Story = {
+  globals: { theme: "dark" },
+  render: () => <Comparison />
+};
