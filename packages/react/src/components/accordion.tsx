@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { cn } from "../lib";
+import { navItemPressClassName } from "./nav-item-styles";
 
 const Accordion = AccordionPrimitive.Root;
 
@@ -24,7 +25,8 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex flex-1 items-center justify-between gap-4 rounded-sm py-4 text-left font-medium ring-offset-background transition-colors hover:text-action-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180",
+        "my-1 flex flex-1 items-center justify-between gap-4 rounded-lg px-3 py-3 text-left font-medium ring-offset-background transition-[color,background-color,transform] duration-150 hover:bg-primary/5 active:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=open]:text-action-foreground [&[data-state=open]>svg]:rotate-180 [&[data-state=open]>svg]:text-action-foreground",
+        navItemPressClassName,
         className
       )}
       {...props}
@@ -46,7 +48,7 @@ const AccordionContent = React.forwardRef<
     className="overflow-hidden text-sm text-muted-foreground data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down motion-reduce:animate-none"
     {...props}
   >
-    <div className={cn("pb-4 pt-0", className)}>{children}</div>
+    <div className={cn("px-3 pb-4 pt-1", className)}>{children}</div>
   </AccordionPrimitive.Content>
 ));
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
