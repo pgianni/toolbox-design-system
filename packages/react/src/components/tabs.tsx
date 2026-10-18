@@ -5,18 +5,22 @@ import { cn } from "../lib";
 import {
   navItemActiveStateClassName,
   navItemBaseClassName,
-  navItemPillClassName,
-  navItemPressClassName
+  navItemPillClassName
 } from "./nav-item-styles";
+
+// `default` and `view` share the same pill look; `view` is kept as an alias.
+const pillListClassName =
+  "h-auto justify-center rounded-2xl border border-border bg-background p-1";
+const pillTriggerClassName = cn(navItemPillClassName, navItemActiveStateClassName);
 
 const tabsListVariants = cva(
   "inline-flex items-center text-muted-foreground",
   {
     variants: {
       variant: {
-        default: "h-10 justify-center rounded-lg bg-muted p-1",
+        default: pillListClassName,
         page: "h-12 max-w-full justify-start overflow-x-auto bg-transparent p-0",
-        view: "h-auto justify-center rounded-2xl border border-border bg-background p-1"
+        view: pillListClassName
       }
     },
     defaultVariants: {
@@ -30,14 +34,10 @@ const tabsTriggerVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          cn(
-            "h-8 rounded-md px-3 hover:bg-background/60 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
-            navItemPressClassName
-          ),
+        default: pillTriggerClassName,
         page:
           "h-12 rounded-none border-t-2 border-transparent px-3 hover:bg-accent data-[state=active]:border-action-foreground data-[state=active]:bg-background data-[state=active]:text-action-foreground",
-        view: cn(navItemPillClassName, navItemActiveStateClassName)
+        view: pillTriggerClassName
       }
     },
     defaultVariants: {

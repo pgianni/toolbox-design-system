@@ -54,7 +54,7 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
   );
 }
 
-function TabsRow({ variant }: { variant: "default" | "page" | "view" }) {
+function TabsRow({ variant }: { variant: "default" | "page" }) {
   return (
     <Tabs variant={variant} defaultValue={items[0]}>
       <TabsList aria-label={`Tabs ${variant}`}>
@@ -86,10 +86,7 @@ function Comparison() {
           ))}
         </AppHeaderNav>
       </Row>
-      <Row label='Tabs "view"'>
-        <TabsRow variant="view" />
-      </Row>
-      <Row label='Tabs "default"'>
+      <Row label="Tabs">
         <TabsRow variant="default" />
       </Row>
       <Row label='Tabs "page"'>
