@@ -5,6 +5,7 @@ import {
   AppHeaderNavItem,
   MobileBottomNav,
   MobileBottomNavItem,
+  SegmentedControl,
   Tabs,
   TabsList,
   TabsTrigger
@@ -88,6 +89,13 @@ function Comparison() {
       </Row>
       <Row label="Tabs">
         <TabsRow variant="default" />
+      </Row>
+      <Row label="SegmentedControl">
+        <SegmentedControl
+          aria-label="Section"
+          defaultValue={items[0]}
+          options={items.map((item) => ({ value: item, label: item }))}
+        />
       </Row>
       <Row label='Tabs "page"'>
         <TabsRow variant="page" />
