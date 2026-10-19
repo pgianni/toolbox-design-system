@@ -1,5 +1,30 @@
 # @pgianni/toolbox-react
 
+## 0.10.0
+
+### Minor Changes
+
+- f92683a: Restyle two `Button` variants:
+  
+  - `secondary` (and its `brand-outline` alias) now uses the neutral border and
+    background that `tertiary` had (`border-input`, `bg-background`,
+    `hover:bg-accent`) and keeps its `action-foreground` label.
+  - `tertiary` has no border or background at rest, and its icon uses
+    `muted-foreground`. Its hover and pressed states are unchanged.
+  
+  `outline` keeps the bordered neutral look.
+  
+  Add a `danger` option to `Button` (and `AlertDialogAction`/`AlertDialogCancel`)
+  for destructive actions. It works with any variant: filled variants turn
+  `bg-destructive`; `secondary`, `outline`, `tertiary`, `ghost` and `link` get a
+  red label (`red-600`, `red-400` in dark mode) and a red-tinted hover.
+
+### Patch Changes
+
+- 9562f61: The compact (satellite) `AppHeader` always shows its bottom border again. Hiding
+  the border until the page scrolls is now controlled by `borderOnScroll`, which
+  defaults to `true` only for `density="comfortable"` (portal header).
+
 ## 0.9.0
 
 ### Minor Changes
