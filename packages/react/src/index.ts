@@ -216,3 +216,19 @@ export {
   type StepperProps,
   type StepperStep
 } from "./components/stepper";
+export {
+  SegmentedControl,
+  type SegmentedControlProps,
+  type SegmentedControlOption
+} from "./components/segmented-control";
+export {
+  OptionCardGroup,
+  OptionCard,
+  optionCardVariants,
+  type OptionCardProps
+} from "./components/option-card";
+export {
+  NumberInput,
+  numberInputVariants,
+  type NumberInputProps
+} from "./components/number-input";

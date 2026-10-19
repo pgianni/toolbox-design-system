@@ -14,3 +14,8 @@ export const navItemActiveClassName =
 // Same active look, driven by Radix `data-state="active"`.
 export const navItemActiveStateClassName =
   "data-[state=active]:bg-primary/10 data-[state=active]:text-action-foreground data-[state=active]:hover:bg-primary/15 data-[state=active]:hover:text-action-foreground data-[state=active]:active:bg-primary/20";
+
+// Same active look for radio-based items (SegmentedControl, OptionCard), which
+// Radix marks with `data-state="checked"`.
+export const navItemCheckedStateClassName =
+  "data-[state=checked]:bg-primary/10 data-[state=checked]:text-action-foreground data-[state=checked]:hover:bg-primary/15 data-[state=checked]:hover:text-action-foreground data-[state=checked]:active:bg-primary/20";
