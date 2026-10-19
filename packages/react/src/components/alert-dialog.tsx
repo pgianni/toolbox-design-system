@@ -2,7 +2,7 @@ import * as React from "react";
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import { type VariantProps } from "class-variance-authority";
 import { cn } from "../lib";
-import { buttonVariants } from "./button";
+import { buttonVariants, warnDeprecatedButtonVariant } from "./button";
 import {
   dialogContentVariants,
   dialogDescriptionClassName,
@@ -110,13 +110,16 @@ export interface AlertDialogActionProps
 const AlertDialogAction = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Action>,
   AlertDialogActionProps
->(({ className, variant, size, shape, danger, ...props }, ref) => (
+>(({ className, variant, size, shape, danger, ...props }, ref) => {
+  warnDeprecatedButtonVariant(variant);
+  return (
   <AlertDialogPrimitive.Action
     ref={ref}
     className={cn(buttonVariants({ variant, size, shape, danger }), className)}
     {...props}
   />
-));
+  );
+});
 AlertDialogAction.displayName = AlertDialogPrimitive.Action.displayName;
 
 export interface AlertDialogCancelProps

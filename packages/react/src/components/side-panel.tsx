@@ -39,7 +39,7 @@ const SidePanelClose = DialogPrimitive.Close;
 const SidePanelPortal = DialogPrimitive.Portal;
 
 const sidePanelOverlayVariants = cva(
-  "fixed inset-x-0 bottom-0 z-50 bg-black/20 data-[state=closed]:animate-fade-out data-[state=open]:animate-fade-in motion-reduce:animate-none",
+  "fixed inset-x-0 bottom-0 z-50 bg-slate-200/70 dark:bg-slate-800/70 data-[state=closed]:animate-fade-out data-[state=open]:animate-fade-in motion-reduce:animate-none",
   {
     variants: {
       inset: {

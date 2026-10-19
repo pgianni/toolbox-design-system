@@ -1,4 +1,10 @@
-export { Button, buttonVariants, type ButtonProps } from "./components/button";
+export {
+  Button,
+  buttonVariants,
+  deprecatedButtonVariants,
+  type ButtonProps,
+  type ButtonVariant
+} from "./components/button";
 export { Input, type InputProps } from "./components/input";
 export { Textarea, type TextareaProps } from "./components/textarea";
 export { Label, labelVariants, type LabelProps } from "./components/label";
@@ -22,7 +28,7 @@ export {
   CardDescription,
   CardContent
 } from "./components/card";
-export { Badge, badgeVariants, type BadgeProps } from "./components/badge";
+export { Badge, badgeVariants, type BadgeProps, type BadgeVariant } from "./components/badge";
 export {
   Tooltip,
   TooltipContent,
@@ -237,3 +243,4 @@ export {
   numberInputVariants,
   type NumberInputProps
 } from "./components/number-input";
+export { SearchInput, type SearchInputProps } from "./components/search-input";

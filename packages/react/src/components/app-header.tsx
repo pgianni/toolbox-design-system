@@ -289,7 +289,7 @@ AppHeaderActions.displayName = "AppHeaderActions";
 
 // Pointer, hover/keyboard highlight and pressed tint for AppSwitcher links.
 const appSwitcherLinkStateClassName =
-  "cursor-pointer hover:bg-primary/5 focus:bg-primary/5 data-[highlighted]:bg-primary/5 active:bg-primary/10 data-[highlighted]:active:bg-primary/10";
+  "cursor-pointer hover:bg-accent focus:bg-accent data-[highlighted]:bg-accent active:bg-primary/10 data-[highlighted]:active:bg-primary/10";
 
 export type AppSwitcherApplication = {
   id: string;

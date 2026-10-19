@@ -1,33 +1,41 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib";
+import { warnDeprecated } from "../deprecation";
+import { Tag, tagVariants, type TagAppearance, type TagTone } from "./tag";
 
-export const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors duration-fast ease-out-soft focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-  {
-    variants: {
-      variant: {
-        default:
-          "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
-        secondary:
-          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive:
-          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-        outline: "text-foreground"
-      }
-    },
-    defaultVariants: {
-      variant: "default"
-    }
-  }
-);
+// Badge is merged into Tag: it now renders a Tag and maps its old variants.
+// Kept for compatibility; it will be removed in the next major version.
 
-export interface BadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
+export type BadgeVariant = "default" | "secondary" | "destructive" | "outline";
 
+const badgeToTag: Record<BadgeVariant, { tone: TagTone; appearance: TagAppearance; replacement: string }> = {
+  default: { tone: "primary", appearance: "solid", replacement: '<Tag tone="primary" appearance="solid">' },
+  secondary: { tone: "neutral", appearance: "soft", replacement: "<Tag>" },
+  destructive: { tone: "danger", appearance: "solid", replacement: '<Tag tone="danger" appearance="solid">' },
+  outline: { tone: "neutral", appearance: "outline", replacement: '<Tag appearance="outline">' }
+};
+
+/** @deprecated Use `tagVariants`. */
+export function badgeVariants({ variant }: { variant?: BadgeVariant | null } = {}) {
+  const { tone, appearance } = badgeToTag[variant ?? "default"];
+  return tagVariants({ tone, appearance });
+}
+
+export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+  variant?: BadgeVariant | null;
+}
+
+/** @deprecated Use `Tag` (see MIGRATION.md for the variant mapping). */
 export function Badge({ className, variant, ...props }: BadgeProps) {
+  const mapping = badgeToTag[variant ?? "default"];
+  warnDeprecated(`Badge est remplacé par Tag : utilisez ${mapping.replacement}.`);
+
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+    <Tag
+      tone={mapping.tone}
+      appearance={mapping.appearance}
+      className={cn(className)}
+      {...props}
+    />
   );
 }
