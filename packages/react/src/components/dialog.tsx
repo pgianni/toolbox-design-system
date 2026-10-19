@@ -2,6 +2,7 @@ import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib";
+import { Button } from "./button";
 
 const Dialog = DialogPrimitive.Root;
 const DialogTrigger = DialogPrimitive.Trigger;
@@ -125,11 +126,15 @@ const DialogContent = React.forwardRef<
             {children}
           </DialogLayoutContext.Provider>
           {showClose ? (
-            <DialogPrimitive.Close
-              className="absolute right-3 top-3 inline-flex h-10 w-10 items-center justify-center rounded-full text-muted-foreground transition-colors duration-fast ease-out-soft hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none"
-            >
-              <CloseIcon />
-              <span className="sr-only">{closeLabel}</span>
+            <DialogPrimitive.Close asChild>
+              <Button
+                variant="tertiary"
+                size="icon"
+                className="absolute right-3 top-3"
+                aria-label={closeLabel}
+              >
+                <CloseIcon />
+              </Button>
             </DialogPrimitive.Close>
           ) : null}
         </DialogPrimitive.Content>
