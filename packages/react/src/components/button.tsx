@@ -20,7 +20,7 @@ export const buttonVariants = cva(
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground active:translate-y-0.5",
         ghost:
           "text-action-foreground hover:bg-accent hover:text-action-foreground active:translate-y-0.5",
-        link: "text-primary underline-offset-4 hover:underline",
+        link: "text-action-foreground underline-offset-4 hover:underline",
         gradient:
           "bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:from-purple-700 hover:to-indigo-700 active:translate-y-0.5",
         brand: "rounded-full bg-primary text-primary-foreground hover:bg-primary/90 active:translate-y-0.5",
