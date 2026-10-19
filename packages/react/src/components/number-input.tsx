@@ -2,6 +2,7 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib";
 import { Button } from "./button";
+import { controlHeightClassName } from "./control-sizes";
 
 // Number field with − / + buttons, from UX Method's CounterInput (number of
 // screens per complexity). The buttons stop at `min` and `max`.
@@ -9,6 +10,7 @@ import { Button } from "./button";
 export const numberInputVariants = cva("flex items-center", {
   variants: {
     size: {
+      sm: "gap-1.5",
       md: "gap-2",
       lg: "gap-2.5"
     }
@@ -69,15 +71,16 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       onValueChange?.(clamped);
     };
 
-    const large = size === "lg";
-    const buttonSize = large ? "icon-lg" : "icon";
+    const controlSize = size ?? "md";
+    const fieldWidth = { sm: "w-14 text-sm", md: "w-16 text-sm", lg: "w-20 text-lg" }[controlSize];
 
     return (
       <div className={cn(numberInputVariants({ size }), wrapperClassName)}>
         <Button
           type="button"
           variant="outline"
-          size={buttonSize}
+          size={controlSize}
+          iconOnly
           shape="rounded"
           aria-label={decrementLabel}
           disabled={disabled || value <= min}
@@ -105,7 +108,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
           }}
           className={cn(
             "flex rounded-md border border-input bg-background px-2 text-right font-medium tabular-nums ring-offset-background transition-colors duration-fast ease-out-soft hover:bg-accent focus-visible:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
-            large ? "h-11 w-20 text-lg" : "h-10 w-16 text-sm",
+            controlHeightClassName[controlSize],
+            fieldWidth,
             className
           )}
           {...props}
@@ -113,7 +117,8 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         <Button
           type="button"
           variant="primary"
-          size={buttonSize}
+          size={controlSize}
+          iconOnly
           shape="rounded"
           aria-label={incrementLabel}
           disabled={disabled || value >= max}

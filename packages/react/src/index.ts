@@ -18,7 +18,8 @@ export {
   SelectItem,
   SelectSeparator,
   SelectScrollUpButton,
-  SelectScrollDownButton
+  SelectScrollDownButton,
+  type SelectTriggerProps
 } from "./components/select";
 export {
   Card,
@@ -244,3 +245,4 @@ export {
   type NumberInputProps
 } from "./components/number-input";
 export { SearchInput, type SearchInputProps } from "./components/search-input";
+export type { ControlSize } from "./components/control-sizes";

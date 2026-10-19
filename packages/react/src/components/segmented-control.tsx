@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { cn } from "../lib";
+import type { ControlSize } from "./control-sizes";
 import {
   navItemBaseClassName,
   navItemCheckedStateClassName,
@@ -26,12 +27,26 @@ export interface SegmentedControlProps
   options: readonly SegmentedControlOption[];
   /** Hides the labels visually (they stay available to screen readers). */
   iconOnly?: boolean;
+  /** Total height on the shared control scale: sm 36, md 40 (default), lg 44 px. */
+  size?: ControlSize;
 }
+
+// Item height = control height − 2 × (1 px border + 4 px padding).
+const itemSizeClassName: Record<ControlSize, string> = {
+  sm: "h-[26px] px-2.5",
+  md: "h-[30px] px-3",
+  lg: "h-[34px] px-3"
+};
+const iconOnlyItemClassName: Record<ControlSize, string> = {
+  sm: "w-[26px] px-0",
+  md: "w-[30px] px-0",
+  lg: "w-[34px] px-0"
+};
 
 const SegmentedControl = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
   SegmentedControlProps
->(({ className, options, iconOnly = false, ...props }, ref) => (
+>(({ className, options, iconOnly = false, size = "md", ...props }, ref) => (
   <RadioGroupPrimitive.Root
     ref={ref}
     orientation="horizontal"
@@ -51,7 +66,8 @@ const SegmentedControl = React.forwardRef<
           navItemPillClassName,
           navItemCheckedStateClassName,
           "ring-offset-background",
-          iconOnly && "w-9 px-0"
+          itemSizeClassName[size],
+          iconOnly && iconOnlyItemClassName[size]
         )}
       >
         {option.icon}

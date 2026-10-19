@@ -36,6 +36,7 @@ export const buttonVariants = cva(
       size: {
         default: "h-10 px-4 py-2 text-sm",
         sm: "h-9 px-3 text-sm",
+        md: "h-10 px-4 py-2 text-sm",
         lg: "h-11 px-6 text-base",
         icon: "h-10 w-10",
         "icon-xs": "h-6 w-6 p-0 [&_svg]:size-3",
@@ -48,6 +49,11 @@ export const buttonVariants = cva(
         pill: "rounded-full",
         square: "rounded-none"
       },
+      // Square icon-only button of the same height as the size (sm, md, lg).
+      iconOnly: {
+        true: "px-0 py-0",
+        false: null
+      },
       // Red treatment for destructive actions, combined with any variant.
       danger: {
         true: null,
@@ -55,6 +61,9 @@ export const buttonVariants = cva(
       }
     },
     compoundVariants: [
+      { iconOnly: true, size: "sm", className: "w-9" },
+      { iconOnly: true, size: ["md", "default"], className: "w-10" },
+      { iconOnly: true, size: "lg", className: "w-11 [&_svg]:size-5" },
       {
         variant: ["primary", "default", "brand", "purple", "save"],
         danger: true,
@@ -81,8 +90,9 @@ export const buttonVariants = cva(
     ],
     defaultVariants: {
       variant: "primary",
-      size: "default",
+      size: "md",
       shape: "pill",
+      iconOnly: false,
       danger: false
     }
   }
@@ -120,14 +130,14 @@ export interface ButtonProps
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, shape, danger, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, shape, danger, iconOnly, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     warnDeprecatedButtonVariant(variant);
 
     return (
       <Comp
         ref={ref}
-        className={cn(buttonVariants({ variant, size, shape, danger }), className)}
+        className={cn(buttonVariants({ variant, size, shape, danger, iconOnly }), className)}
         {...props}
       />
     );
