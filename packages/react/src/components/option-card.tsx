@@ -2,7 +2,6 @@ import * as React from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib";
-import { navItemPressClassName } from "./nav-item-styles";
 
 // Large selectable choice with an illustration, label and helper text, from
 // UX Method's questionnaire (OptionButton). Built on a radio group so the
@@ -22,8 +21,9 @@ OptionCardGroup.displayName = "OptionCardGroup";
 
 export const optionCardVariants = cva(
   cn(
-    "group relative flex min-w-0 cursor-pointer items-center gap-4 rounded-xl border border-border bg-background p-3 text-left text-foreground ring-offset-background transition-[color,background-color,border-color,transform] duration-fast ease-out-soft hover:bg-accent active:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary/40 data-[state=checked]:bg-primary/10 data-[state=checked]:text-action-foreground data-[state=checked]:hover:bg-primary/15",
-    navItemPressClassName
+    "group relative flex min-w-0 cursor-pointer items-center gap-4 rounded-xl border border-border bg-background p-3 text-left text-foreground ring-offset-background transition-[color,background-color,border-color,transform] duration-fast ease-out-soft [&:not(:disabled)]:hover:bg-accent [&:not(:disabled)]:active:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-primary/40 data-[state=checked]:bg-primary/10 data-[state=checked]:text-action-foreground data-[state=checked]:[&:not(:disabled)]:hover:bg-primary/15",
+    // Press translate only when enabled, like the hover and press colours.
+    "[&:not(:disabled)]:active:translate-y-0.5 motion-reduce:transform-none"
   ),
   {
     variants: {

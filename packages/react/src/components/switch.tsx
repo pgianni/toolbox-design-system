@@ -6,7 +6,7 @@ import { cn } from "../lib";
 const switchVariants = cva(
   // Same interactions as Checkbox: darker on hover, purple tint and a slight
   // shrink while pressed.
-  "peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-[color,background-color,transform] duration-fast ease-out-soft active:scale-95 motion-reduce:transform-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:hover:bg-primary/90 data-[state=checked]:active:bg-primary/80 data-[state=unchecked]:bg-input data-[state=unchecked]:hover:bg-muted-foreground/30 data-[state=unchecked]:active:bg-primary/25",
+  "peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-[color,background-color,transform] duration-fast ease-out-soft [&:not(:disabled)]:active:scale-95 motion-reduce:transform-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:[&:not(:disabled)]:hover:bg-primary/90 data-[state=checked]:[&:not(:disabled)]:active:bg-primary/80 data-[state=unchecked]:bg-input data-[state=unchecked]:[&:not(:disabled)]:hover:bg-muted-foreground/30 data-[state=unchecked]:[&:not(:disabled)]:active:bg-primary/25",
   {
     variants: {
       size: {

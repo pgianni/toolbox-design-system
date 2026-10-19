@@ -18,7 +18,7 @@ RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
 // Same interactions as Checkbox: grey on hover, purple tint and a slight
 // shrink while pressed.
 export const radioGroupItemVariants = cva(
-  "peer aspect-square shrink-0 cursor-pointer rounded-full border border-muted-foreground text-action-foreground ring-offset-background transition-[color,background-color,border-color,transform] duration-fast ease-out-soft hover:border-foreground/70 hover:bg-accent active:scale-90 active:bg-primary/10 motion-reduce:transform-none focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-action-foreground data-[state=checked]:hover:bg-primary/10 data-[state=checked]:active:bg-primary/20",
+  "peer aspect-square shrink-0 cursor-pointer rounded-full border border-muted-foreground text-action-foreground ring-offset-background transition-[color,background-color,border-color,transform] duration-fast ease-out-soft [&:not(:disabled)]:hover:border-foreground/70 [&:not(:disabled)]:hover:bg-accent [&:not(:disabled)]:active:scale-90 [&:not(:disabled)]:active:bg-primary/10 motion-reduce:transform-none focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-action-foreground data-[state=checked]:[&:not(:disabled)]:hover:bg-primary/10 data-[state=checked]:[&:not(:disabled)]:active:bg-primary/20",
   {
     variants: {
       size: {
