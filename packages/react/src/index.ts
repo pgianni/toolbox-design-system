@@ -179,3 +179,15 @@ export {
   type AppFooterProps,
   type AppFooterApplication
 } from "./components/app-footer";
+export {
+  Tag,
+  TagToggle,
+  TagGroup,
+  tagVariants,
+  tagToggleVariants,
+  type TagProps,
+  type TagToggleProps,
+  type TagGroupProps,
+  type TagTone,
+  type TagAppearance
+} from "./components/tag";

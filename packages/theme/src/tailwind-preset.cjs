@@ -55,6 +55,42 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
           muted: "hsl(var(--card-muted))"
         },
+        // Feedback tones: bg-success, bg-success-soft, text-success-soft-foreground, border-success-border…
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+          soft: "hsl(var(--success-soft))",
+          "soft-foreground": "hsl(var(--success-soft-foreground))",
+          border: "hsl(var(--success-border))"
+        },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+          soft: "hsl(var(--warning-soft))",
+          "soft-foreground": "hsl(var(--warning-soft-foreground))",
+          border: "hsl(var(--warning-border))"
+        },
+        danger: {
+          DEFAULT: "hsl(var(--danger))",
+          foreground: "hsl(var(--danger-foreground))",
+          soft: "hsl(var(--danger-soft))",
+          "soft-foreground": "hsl(var(--danger-soft-foreground))",
+          border: "hsl(var(--danger-border))"
+        },
+        info: {
+          DEFAULT: "hsl(var(--info))",
+          foreground: "hsl(var(--info-foreground))",
+          soft: "hsl(var(--info-soft))",
+          "soft-foreground": "hsl(var(--info-soft-foreground))",
+          border: "hsl(var(--info-border))"
+        },
+        neutral: {
+          DEFAULT: "hsl(var(--neutral))",
+          foreground: "hsl(var(--neutral-foreground))",
+          soft: "hsl(var(--neutral-soft))",
+          "soft-foreground": "hsl(var(--neutral-soft-foreground))",
+          border: "hsl(var(--neutral-border))"
+        },
         app: "hsl(var(--app-background))",
         "app-background": "hsl(var(--app-background))",
         icebreaker: "hsl(var(--icebreaker))",

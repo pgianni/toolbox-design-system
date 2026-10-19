@@ -31,6 +31,33 @@
   --shadow-sm: 0 1px 2px 0 hsl(220 20% 10% / 0.05);
   --shadow-md: 0 4px 6px -1px hsl(220 20% 10% / 0.1), 0 2px 4px -2px hsl(220 20% 10% / 0.1);
   --shadow-lg: 0 10px 15px -3px hsl(220 20% 10% / 0.1), 0 4px 6px -4px hsl(220 20% 10% / 0.1);
+
+  /* Feedback tones (Tag, statuses): solid base, then soft surface, text and border. */
+  --success: 142 72% 29%;
+  --success-foreground: 0 0% 100%;
+  --success-soft: 138 76% 97%;
+  --success-soft-foreground: 143 64% 24%;
+  --success-border: 141 79% 85%;
+  --warning: 25 90% 39%;
+  --warning-foreground: 0 0% 100%;
+  --warning-soft: 33 100% 96%;
+  --warning-soft-foreground: 21 83% 28%;
+  --warning-border: 32 98% 83%;
+  --danger: 0 72% 45%;
+  --danger-foreground: 0 0% 100%;
+  --danger-soft: 0 86% 97%;
+  --danger-soft-foreground: 0 63% 31%;
+  --danger-border: 0 93% 89%;
+  --info: 221 83% 45%;
+  --info-foreground: 0 0% 100%;
+  --info-soft: 214 100% 97%;
+  --info-soft-foreground: 221 71% 32%;
+  --info-border: 213 97% 87%;
+  --neutral: 215 16% 40%;
+  --neutral-foreground: 0 0% 100%;
+  --neutral-soft: 210 20% 96%;
+  --neutral-soft-foreground: 215 25% 27%;
+  --neutral-border: 214 20% 85%;
 }
 
 .dark {
@@ -56,4 +83,30 @@
   --ring: 256 100% 50%;
   --app-background: 222.2 84% 4.9%;
   --card-muted: 217.2 32.6% 17.5%;
+
+  --success: 142 69% 58%;
+  --success-foreground: 145 80% 10%;
+  --success-soft: 144 61% 12%;
+  --success-soft-foreground: 141 79% 85%;
+  --success-border: 143 64% 24%;
+  --warning: 32 95% 62%;
+  --warning-foreground: 21 83% 14%;
+  --warning-soft: 20 70% 14%;
+  --warning-soft-foreground: 33 100% 83%;
+  --warning-border: 24 75% 34%;
+  --danger: 0 84% 65%;
+  --danger-foreground: 0 63% 12%;
+  --danger-soft: 0 63% 15%;
+  --danger-soft-foreground: 0 93% 89%;
+  --danger-border: 0 63% 31%;
+  --info: 213 94% 68%;
+  --info-foreground: 221 71% 16%;
+  --info-soft: 222 62% 16%;
+  --info-soft-foreground: 213 97% 87%;
+  --info-border: 221 71% 32%;
+  --neutral: 215 20% 65%;
+  --neutral-foreground: 215 28% 12%;
+  --neutral-soft: 215 25% 14%;
+  --neutral-soft-foreground: 214 20% 85%;
+  --neutral-border: 215 19% 27%;
 }
