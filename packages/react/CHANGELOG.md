@@ -1,5 +1,44 @@
 # @pgianni/toolbox-react
 
+## 0.13.0
+
+### Minor Changes
+
+- d9fa65d: Deprecate legacy APIs, with a migration guide in MIGRATION.md:
+  
+  - `Button` variants `default`, `brand`, `purple`, `save`, `gradient`,
+    `destructive`, `brand-outline` and `brand-ghost` keep working but log a
+    development warning pointing to their replacement (`primary`,
+    `primary` + `danger`, `secondary` or `ghost`). The default variant is now
+    `primary`. `deprecatedButtonVariants` exports the mapping.
+  - `Badge` is merged into `Tag`: it now renders a `Tag` with the matching tone
+    and appearance, logs a development warning, and `badgeVariants` returns the
+    `tagVariants` classes.
+- d9fa65d: Harmonize interactions with the rest of the system:
+  
+  - `DropdownMenu` items (and checkbox, radio and sub-trigger items) show a
+    pointer, keep the grey highlight and turn purple while pressed; destructive
+    items darken while pressed. `AppSwitcher` rows use the same grey highlight.
+  - `Switch` darkens on hover, takes a purple tint while pressed and shrinks
+    slightly (`scale(0.95)`), like `Checkbox`.
+  - `SidePanel` uses the same translucent grey overlay as `Dialog` instead of
+    black.
+- d9fa65d: Add `SearchInput`, replacing the "search icon + Input" pattern found in five
+  toolbox apps: leading magnifier, clear button (and Escape) when it has a
+  value, controlled or uncontrolled (`value`, `defaultValue`, `onValueChange`,
+  `onClear`).
+
+### Patch Changes
+
+- d9fa65d: Disabled buttons show the not-allowed cursor instead of ignoring the pointer.
+  Hover and press styles of `Button` (and `AlertDialog` actions) are scoped to
+  enabled buttons, so a disabled button keeps its look.
+- 79b2440: `Label` shows a pointer cursor when it is tied to a control with `htmlFor`
+  (checkbox, radio, switch, field), since clicking it toggles or focuses the
+  control. It keeps the not-allowed cursor when the control is disabled;
+  `RadioGroupItem` is now a `peer` so its label dims when disabled, like
+  `Checkbox`.
+
 ## 0.12.0
 
 ### Minor Changes
