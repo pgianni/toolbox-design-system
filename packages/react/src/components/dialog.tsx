@@ -128,9 +128,9 @@ const DialogContent = React.forwardRef<
           {showClose ? (
             <DialogPrimitive.Close asChild>
               <Button
-                variant="tertiary"
-                size="icon"
-                className="absolute right-3 top-3"
+                variant="outline"
+                size="icon-sm"
+                className="absolute right-4 top-4"
                 aria-label={closeLabel}
               >
                 <CloseIcon />
