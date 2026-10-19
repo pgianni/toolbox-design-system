@@ -86,3 +86,27 @@ export const Disabled: Story = {
     </div>
   )
 };
+
+export const Sizes: Story = {
+  name: "Tailles (md, lg)",
+  render: () => (
+    <div className="grid gap-3">
+      <div className="flex items-center gap-2">
+        <Checkbox id="size-md" defaultChecked />
+        <Label htmlFor="size-md">Taille md (16 px)</Label>
+      </div>
+      <div className="flex items-center gap-2.5">
+        <Checkbox id="size-lg" size="lg" defaultChecked />
+        <Label htmlFor="size-lg" className="text-base">
+          Taille lg (20 px)
+        </Label>
+      </div>
+      <div className="flex items-center gap-2.5">
+        <Checkbox id="size-lg-off" size="lg" />
+        <Label htmlFor="size-lg-off" className="text-base">
+          Taille lg, non cochée
+        </Label>
+      </div>
+    </div>
+  )
+};

@@ -66,3 +66,23 @@ export const Disabled: Story = {
     </RadioGroup>
   )
 };
+
+export const Large: Story = {
+  name: "Taille lg",
+  args: {
+    defaultValue: "medium",
+    "aria-label": "Durée du projet"
+  },
+  render: (args) => (
+    <RadioGroup {...args} className="gap-3">
+      {durations.map((duration) => (
+        <div key={duration.value} className="flex items-center gap-2.5">
+          <RadioGroupItem size="lg" value={duration.value} id={`lg-duration-${duration.value}`} />
+          <Label htmlFor={`lg-duration-${duration.value}`} className="text-base">
+            {duration.label}
+          </Label>
+        </div>
+      ))}
+    </RadioGroup>
+  )
+};

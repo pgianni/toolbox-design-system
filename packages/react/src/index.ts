@@ -157,8 +157,13 @@ export {
   CollapsibleTrigger,
   CollapsibleContent
 } from "./components/collapsible";
-export { RadioGroup, RadioGroupItem } from "./components/radio-group";
-export { Checkbox } from "./components/checkbox";
+export {
+  RadioGroup,
+  RadioGroupItem,
+  radioGroupItemVariants,
+  type RadioGroupItemProps
+} from "./components/radio-group";
+export { Checkbox, checkboxVariants, type CheckboxProps } from "./components/checkbox";
 export {
   SidePanel,
   SidePanelTrigger,

@@ -104,7 +104,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
             onBlur?.(event);
           }}
           className={cn(
-            "flex rounded-md border border-input bg-background px-2 text-right font-medium tabular-nums ring-offset-background transition-colors duration-fast ease-out-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
+            "flex rounded-md border border-input bg-background px-2 text-right font-medium tabular-nums ring-offset-background transition-colors duration-fast ease-out-soft hover:bg-accent focus-visible:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
             large ? "h-11 w-20 text-lg" : "h-10 w-16 text-sm",
             className
           )}
