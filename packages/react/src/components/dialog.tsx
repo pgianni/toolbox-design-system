@@ -41,7 +41,7 @@ const dialogContentVariants = cva(
 
 // Shared with AlertDialog so both overlays look the same.
 export const dialogOverlayClassName =
-  "fixed inset-0 z-50 bg-black/60 backdrop-blur-[2px] transition-opacity duration-200 data-[state=closed]:opacity-0 data-[state=open]:opacity-100";
+  "fixed inset-0 z-50 bg-slate-200/70 dark:bg-slate-800/70 transition-opacity duration-200 data-[state=closed]:opacity-0 data-[state=open]:opacity-100";
 export const dialogHeaderClassName = "flex flex-col gap-1.5 text-center sm:text-left";
 export const dialogFooterClassName =
   "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end";
