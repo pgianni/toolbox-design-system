@@ -86,8 +86,9 @@ type ButtonStoryArgs = ComponentProps<typeof Button> & {
 };
 
 const meta = {
+  title: "Actions/Button",
   component: Button,
-  tags: ["ai-generated"],
+  tags: ["autodocs"],
   args: {
     icon: "None",
     size: "default"
@@ -230,5 +231,36 @@ export const Loading: Story = {
       <SpinnerIcon />
       Enregistrement…
     </Button>
+  )
+};
+
+const legacyVariants = [
+  ["default", "primary"],
+  ["brand", "primary"],
+  ["purple", "primary"],
+  ["save", "primary"],
+  ["gradient", "primary"],
+  ["destructive", "primary + danger"],
+  ["brand-outline", "secondary"],
+  ["brand-ghost", "ghost"]
+] as const;
+
+export const DeprecatedVariants: Story = {
+  name: "Variantes dépréciées",
+  render: () => (
+    <div className="grid gap-3 text-sm">
+      <p className="max-w-md text-muted-foreground">
+        Ces variantes fonctionnent encore mais affichent un avertissement en
+        développement. Elles seront retirées à la prochaine version majeure.
+      </p>
+      {legacyVariants.map(([variant, replacement]) => (
+        <div key={variant} className="flex items-center gap-4">
+          <Button variant={variant} className="w-36">
+            {variant}
+          </Button>
+          <span className="text-muted-foreground">→ {replacement}</span>
+        </div>
+      ))}
+    </div>
   )
 };

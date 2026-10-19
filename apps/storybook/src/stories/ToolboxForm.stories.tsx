@@ -24,7 +24,7 @@ function FormExample() {
 const meta = {
   title: "Forms/Form fields",
   component: FormExample,
-  tags: ["ai-generated"],
+  tags: ["autodocs"],
   parameters: {
     layout: "centered"
   }

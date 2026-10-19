@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { AspectRatio } from "@pgianni/toolbox-react";
 
 const meta = {
-  title: "Utilities/AspectRatio",
+  title: "Layout/AspectRatio",
   component: AspectRatio,
   tags: ["autodocs"],
   parameters: {

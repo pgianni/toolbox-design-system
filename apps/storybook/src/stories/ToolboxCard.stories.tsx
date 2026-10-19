@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
-  Badge,
   Button,
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle
+  CardTitle,
+  Tag
 } from "@pgianni/toolbox-react";
 
 const meta = {
   title: "Surfaces/Card",
   component: Card,
-  tags: ["ai-generated"],
+  tags: ["autodocs"],
   parameters: {
     layout: "centered"
   }
@@ -28,7 +28,7 @@ export const Default: Story = {
       <CardHeader>
         <div className="flex items-center justify-between gap-4">
           <CardTitle>Audit UX</CardTitle>
-          <Badge>Actif</Badge>
+          <Tag tone="primary">Actif</Tag>
         </div>
         <CardDescription>
           Analysez un parcours et centralisez les observations de l’équipe.
@@ -42,16 +42,5 @@ export const Default: Story = {
         <Button>Ouvrir</Button>
       </CardFooter>
     </Card>
-  )
-};
-
-export const BadgeVariants: Story = {
-  render: () => (
-    <div className="flex flex-wrap items-center gap-3">
-      <Badge>Actif</Badge>
-      <Badge variant="secondary">Brouillon</Badge>
-      <Badge variant="destructive">Bloqué</Badge>
-      <Badge variant="outline">Archivé</Badge>
-    </div>
   )
 };

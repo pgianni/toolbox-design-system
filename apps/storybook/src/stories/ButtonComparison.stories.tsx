@@ -4,7 +4,7 @@ import { Button, buttonVariants } from "@pgianni/toolbox-react";
 const variants = ["primary", "secondary", "tertiary", "outline", "ghost", "link"] as const;
 
 const meta = {
-  title: "Stories/ToolboxButton/Comparaison",
+  title: "Actions/Button/Comparaison",
   parameters: {
     layout: "centered"
   }

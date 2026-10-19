@@ -395,7 +395,7 @@ export const NestedDialog: Story = {
           </DialogClose>
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="destructive">Continuer</Button>
+              <Button danger>Continuer</Button>
             </DialogTrigger>
             <DialogContent size="sm">
               <DialogHeader>
@@ -408,7 +408,7 @@ export const NestedDialog: Story = {
                 <DialogClose asChild>
                   <Button variant="outline">Retour</Button>
                 </DialogClose>
-                <Button variant="destructive">Supprimer</Button>
+                <Button danger>Supprimer</Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>

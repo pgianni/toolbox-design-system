@@ -8,9 +8,9 @@ import {
 } from "@pgianni/toolbox-react";
 
 const meta = {
-  title: "Stories/ToolboxTabs",
+  title: "Navigation/Tabs",
   component: Tabs,
-  tags: ["ai-generated"],
+  tags: ["autodocs"],
   parameters: {
     layout: "centered"
   }

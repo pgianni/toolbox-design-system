@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Avatar, AvatarFallback, AvatarImage } from "@pgianni/toolbox-react";
 
 const meta = {
-  title: "Utilities/Avatar",
+  title: "Data display/Avatar",
   component: Avatar,
   tags: ["autodocs"],
   parameters: {
