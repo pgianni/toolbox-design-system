@@ -3,8 +3,10 @@ import * as LabelPrimitive from "@radix-ui/react-label";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib";
 
+// A label tied to a control (htmlFor) shows a pointer, since clicking it
+// toggles or focuses that control.
 export const labelVariants = cva(
-  "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+  "text-sm font-medium leading-none [&[for]]:cursor-pointer peer-disabled:opacity-70 peer-disabled:[&[for]]:cursor-not-allowed"
 );
 
 export type LabelProps = React.ComponentPropsWithoutRef<
