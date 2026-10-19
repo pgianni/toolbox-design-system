@@ -173,7 +173,7 @@ function HeaderActions({ signedIn = true }: { signedIn?: boolean }) {
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <Button variant="tertiary" size="sm">
+        <Button variant="outline" size="sm">
           <LogInIcon />
           <span>Se connecter</span>
         </Button>
