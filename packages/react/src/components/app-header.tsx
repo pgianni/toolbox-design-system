@@ -321,18 +321,19 @@ function AppSwitcher({
           className
         )}
       >
-        {/* State classes go on the item so they replace its cursor-default and focus:bg-accent. */}
+        {/* State classes go on the item so they replace its cursor-default and focus:bg-accent.
+            Like the application rows, keyboard focus shows as the highlight tint, not a ring. */}
         <DropdownMenuItem asChild className={cn("p-0", appSwitcherLinkStateClassName)}>
           <a
             href={allAppsHref}
-            className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring"
+            className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm font-semibold outline-none transition-colors"
           >
             <GridIcon />
             <span>{allAppsLabel}</span>
           </a>
         </DropdownMenuItem>
         <DropdownMenuSeparator className="mx-0 my-0" />
-        <div className="py-1">
+        <div className="pt-1">
           {applications.map((application) => {
             const content = (
               <>
