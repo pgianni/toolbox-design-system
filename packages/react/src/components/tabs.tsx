@@ -5,7 +5,8 @@ import { cn } from "../lib";
 import {
   navItemActiveStateClassName,
   navItemBaseClassName,
-  navItemPillClassName
+  navItemPillClassName,
+  navItemPressClassName
 } from "./nav-item-styles";
 
 // `default` and `view` share the same pill look; `view` is kept as an alias.
@@ -35,8 +36,10 @@ const tabsTriggerVariants = cva(
     variants: {
       variant: {
         default: pillTriggerClassName,
-        page:
-          "h-12 rounded-none border-t-2 border-transparent px-3 hover:bg-accent data-[state=active]:border-action-foreground data-[state=active]:bg-background data-[state=active]:text-action-foreground",
+        page: cn(
+          "h-12 rounded-none border-t-2 border-transparent px-3 hover:bg-primary/5 active:bg-primary/10 data-[state=active]:border-action-foreground data-[state=active]:bg-background data-[state=active]:text-action-foreground",
+          navItemPressClassName
+        ),
         view: pillTriggerClassName
       }
     },
