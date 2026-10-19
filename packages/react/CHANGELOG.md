@@ -1,5 +1,20 @@
 # @pgianni/toolbox-react
 
+## 0.10.1
+
+### Patch Changes
+
+- c7af21b: The `link` button variant uses `action-foreground` instead of `primary`, so it
+  switches to the lighter violet in dark mode and stays readable, like `ghost`.
+- 28dce45: The active `MobileBottomNavItem` uses the same purple active state as
+  `AppHeaderNavItem` and `Tabs`, including on hover, where it used to turn grey.
+- a74aa4a: `SelectTrigger` gets a pointer cursor, a grey background on hover and a
+  darker grey while pressed, like the tabs. Its chevron uses `action-foreground` and turns over
+  when the list is open.
+- 7458f91: Pressing a tab now shows a purple background instead of the grey hover, in
+  every tab system: `Tabs`, `AppHeaderNavItem` and `MobileBottomNavItem`
+  (`bg-primary/10`, and `bg-primary/20` on the already active item).
+
 ## 0.10.0
 
 ### Minor Changes
