@@ -181,6 +181,11 @@ module.exports = {
         "menu-out": {
           from: { opacity: "1", transform: "scale(1)" },
           to: { opacity: "0", transform: "scale(0.98)" }
+        },
+        // Progress without a known value: a bar sliding across the track.
+        "progress-indeterminate": {
+          from: { transform: "translateX(-100%)" },
+          to: { transform: "translateX(250%)" }
         }
       },
       animation: {
@@ -198,7 +203,8 @@ module.exports = {
         "check-draw": `check-draw ${motion.duration.base} ${motion.easing.outSoft} both`,
         "pop-in": `pop-in ${motion.duration.base} ${motion.easing.spring} both`,
         "menu-in": `menu-in ${motion.duration.base} ${motion.easing.spring}`,
-        "menu-out": `menu-out ${motion.duration.fast} ${motion.easing.outSoft}`
+        "menu-out": `menu-out ${motion.duration.fast} ${motion.easing.outSoft}`,
+        "progress-indeterminate": "progress-indeterminate 1.4s cubic-bezier(0.65, 0, 0.35, 1) infinite"
       }
     }
   }
