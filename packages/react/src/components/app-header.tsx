@@ -57,6 +57,11 @@ export interface AppHeaderProps
   innerClassName?: string;
   collapseOnScroll?: boolean;
   collapseOffset?: number;
+  /**
+   * Hide the bottom border until the page scrolls. Defaults to true for the
+   * comfortable (portal) header; the compact (satellite) header keeps it.
+   */
+  borderOnScroll?: boolean;
 }
 
 const AppHeader = React.forwardRef<HTMLElement, AppHeaderProps>(
@@ -68,6 +73,7 @@ const AppHeader = React.forwardRef<HTMLElement, AppHeaderProps>(
       contained = false,
       collapseOnScroll = false,
       collapseOffset = 24,
+      borderOnScroll,
       children,
       ...props
     },
@@ -95,7 +101,9 @@ const AppHeader = React.forwardRef<HTMLElement, AppHeaderProps>(
         data-collapsed={collapseOnScroll ? collapsed : undefined}
         className={cn(
           appHeaderVariants({ density }),
-          !scrolled && "border-transparent",
+          (borderOnScroll ?? density === "comfortable") &&
+            !scrolled &&
+            "border-transparent",
           className
         )}
         {...props}
