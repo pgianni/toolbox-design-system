@@ -1,5 +1,21 @@
 # @pgianni/toolbox-theme
 
+## 0.6.0
+
+### Minor Changes
+
+- b8f264e: Expose the new tone tokens in the Tailwind preset: `success`, `warning`,
+  `danger`, `info` and `neutral` colours with `DEFAULT`, `foreground`, `soft`,
+  `soft-foreground` and `border` shades (for example `bg-success-soft`,
+  `text-success-soft-foreground`, `border-success-border`).
+- 617f1b2: Add the `progress-indeterminate` keyframe and animation, used by the
+  indeterminate `Progress` bar.
+
+### Patch Changes
+
+- Updated dependencies [b8f264e]
+  - @pgianni/toolbox-tokens@0.3.0
+
 ## 0.5.0
 
 ### Minor Changes
