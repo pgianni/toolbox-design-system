@@ -449,7 +449,7 @@ const MobileBottomNav = React.forwardRef<HTMLElement, MobileBottomNavProps>(
 MobileBottomNav.displayName = "MobileBottomNav";
 
 export const mobileBottomNavItemVariants = cva(
-  "relative flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-lg px-1 py-1 text-center text-xs font-medium text-muted-foreground transition-[color,background-color,transform] duration-fast ease-out-soft hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring active:scale-[0.98] motion-reduce:transform-none [&_svg]:h-5 [&_svg]:w-5 [&_svg]:shrink-0",
+  "relative flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-lg px-1 py-1 text-center text-xs font-medium text-muted-foreground transition-[color,background-color,transform] duration-fast ease-out-soft hover:bg-accent hover:text-foreground active:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring active:scale-[0.98] motion-reduce:transform-none [&_svg]:h-5 [&_svg]:w-5 [&_svg]:shrink-0",
   {
     variants: {
       // Same purple active state as AppHeaderNavItem and Tabs, hover included.

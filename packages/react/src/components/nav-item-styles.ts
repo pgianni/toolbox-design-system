@@ -6,11 +6,11 @@ export const navItemPressClassName =
   "active:translate-y-0.5 motion-reduce:transform-none";
 
 export const navItemPillClassName =
-  `h-9 rounded-lg px-3 hover:bg-accent ${navItemPressClassName}`;
+  `h-9 rounded-lg px-3 hover:bg-accent active:bg-primary/10 ${navItemPressClassName}`;
 
 export const navItemActiveClassName =
-  "bg-primary/10 text-action-foreground hover:bg-primary/15 hover:text-action-foreground";
+  "bg-primary/10 text-action-foreground hover:bg-primary/15 hover:text-action-foreground active:bg-primary/20";
 
 // Same active look, driven by Radix `data-state="active"`.
 export const navItemActiveStateClassName =
-  "data-[state=active]:bg-primary/10 data-[state=active]:text-action-foreground data-[state=active]:hover:bg-primary/15 data-[state=active]:hover:text-action-foreground";
+  "data-[state=active]:bg-primary/10 data-[state=active]:text-action-foreground data-[state=active]:hover:bg-primary/15 data-[state=active]:hover:text-action-foreground data-[state=active]:active:bg-primary/20";
