@@ -1,5 +1,47 @@
 # @pgianni/toolbox-react
 
+## 0.11.0
+
+### Minor Changes
+
+- 617f1b2: Add five components identified across the toolbox apps:
+  
+  - `Alert` (with `AlertTitle`, `AlertDescription`): inline message in the
+    `info`, `success`, `warning`, `danger` or `neutral` tone, with a default
+    icon per tone and an optional `onDismiss`. Warnings and errors use
+    `role="alert"`, the others `role="status"`.
+  - `EmptyState`: icon, title, description and action for empty lists and
+    views; `size` (`sm`, `md`) and `bordered`.
+  - `Spinner`: loading indicator in three sizes that follows the text colour
+    (or `tone="primary"`/`"muted"`); pass `label=""` inside a labelled button.
+  - `Progress`: progress bar with `value`/`max`, `tone`, `size` and
+    `valueText`; leave `value` undefined for an indeterminate bar.
+  - `Stepper`: step indicator (horizontal or vertical) with complete, current
+    and upcoming states; `onStepChange` makes reachable steps clickable.
+  
+  `Alert` and `Progress` tones and the indeterminate `Progress` need
+  `@pgianni/toolbox-theme` 0.6.0.
+- b8f264e: Add a tag system, built from the patterns found across the toolbox apps
+  (Audit, Userflow, Impact, UX Team, UX Method and the Design Hub):
+  
+  - `Tag`: a label for a status, category or severity. `tone` (`neutral`,
+    `primary`, `info`, `success`, `warning`, `danger`), `appearance` (`soft`,
+    `outline`, `solid`) and `size` (`sm`, `md`). `onRemove` adds a remove
+    button, for active filters.
+  - `TagToggle`: a filter tag that can be switched on and off (`pressed`,
+    `defaultPressed`, `onPressedChange`), with an optional `count`. It uses the
+    same purple selection as the tabs.
+  - `TagGroup`: wraps tags on several lines.
+  
+  The tones need `@pgianni/toolbox-tokens` 0.3.0 and `@pgianni/toolbox-theme`
+  0.6.0.
+
+### Patch Changes
+
+- 7bd3514: The close buttons of `Dialog` and `SidePanel` are now design system `Button`s
+  instead of custom markup: `outline` / `icon-sm` in both dialogs and side
+  panels, at the same position. They get the shared hover, press and focus states.
+
 ## 0.10.1
 
 ### Patch Changes
