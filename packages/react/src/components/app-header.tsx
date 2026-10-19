@@ -279,6 +279,10 @@ const AppHeaderActions = React.forwardRef<
 ));
 AppHeaderActions.displayName = "AppHeaderActions";
 
+// Pointer, hover/keyboard highlight and pressed tint for AppSwitcher links.
+const appSwitcherLinkStateClassName =
+  "cursor-pointer hover:bg-primary/5 focus:bg-primary/5 data-[highlighted]:bg-primary/5 active:bg-primary/10 data-[highlighted]:active:bg-primary/10";
+
 export type AppSwitcherApplication = {
   id: string;
   title: string;
@@ -317,10 +321,11 @@ function AppSwitcher({
           className
         )}
       >
-        <DropdownMenuItem asChild className="p-0 focus:bg-transparent">
+        {/* State classes go on the item so they replace its cursor-default and focus:bg-accent. */}
+        <DropdownMenuItem asChild className={cn("p-0", appSwitcherLinkStateClassName)}>
           <a
             href={allAppsHref}
-            className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm font-semibold outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
+            className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring"
           >
             <GridIcon />
             <span>{allAppsLabel}</span>
@@ -347,7 +352,7 @@ function AppSwitcher({
               </>
             );
             const rowClassName = cn(
-              "flex w-full items-start gap-3 rounded-md px-3 py-2 text-left outline-none transition-colors focus:bg-accent data-[highlighted]:bg-accent",
+              "flex w-full items-start gap-3 rounded-md px-3 py-2 text-left outline-none transition-colors",
               application.current && "bg-primary/10"
             );
 
@@ -356,7 +361,12 @@ function AppSwitcher({
                 <DropdownMenuItem
                   key={application.id}
                   asChild
-                  className="p-0 focus:bg-transparent"
+                  className={cn(
+                    "p-0",
+                    appSwitcherLinkStateClassName,
+                    application.current &&
+                      "hover:bg-primary/15 focus:bg-primary/15 data-[highlighted]:bg-primary/15"
+                  )}
                 >
                   <a
                     href={application.href}
