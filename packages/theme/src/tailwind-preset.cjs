@@ -1,3 +1,17 @@
+// Shared motion: quick out, slower settle. Exits use the faster duration.
+const motion = {
+  duration: {
+    fast: "120ms",
+    base: "200ms",
+    slow: "300ms"
+  },
+  easing: {
+    outSoft: "cubic-bezier(0.22, 1, 0.36, 1)",
+    spring: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    drawer: "cubic-bezier(0.32, 0.72, 0, 1)"
+  }
+};
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -56,6 +70,17 @@ module.exports = {
         md: "var(--shadow-md)",
         lg: "var(--shadow-lg)"
       },
+      // Motion tokens: use duration-fast|base|slow with ease-out-soft|spring|drawer.
+      transitionDuration: {
+        fast: motion.duration.fast,
+        base: motion.duration.base,
+        slow: motion.duration.slow
+      },
+      transitionTimingFunction: {
+        "out-soft": motion.easing.outSoft,
+        spring: motion.easing.spring,
+        drawer: motion.easing.drawer
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -88,17 +113,56 @@ module.exports = {
         "fade-out": {
           from: { opacity: "1" },
           to: { opacity: "0" }
+        },
+        // Dialogs are centred with translate(-50%, -50%), so it is kept here.
+        "dialog-in": {
+          from: { opacity: "0", transform: "translate(-50%, -48%) scale(0.96)" },
+          to: { opacity: "1", transform: "translate(-50%, -50%) scale(1)" }
+        },
+        "dialog-out": {
+          from: { opacity: "1", transform: "translate(-50%, -50%) scale(1)" },
+          to: { opacity: "0", transform: "translate(-50%, -49%) scale(0.98)" }
+        },
+        // Content that appears inside an opening container (accordion, menu rows).
+        "content-in": {
+          from: { opacity: "0", transform: "translateY(-4px)" },
+          to: { opacity: "1", transform: "translateY(0)" }
+        },
+        // Checkbox tick drawn along its path (needs pathLength="1").
+        "check-draw": {
+          from: { strokeDashoffset: "1" },
+          to: { strokeDashoffset: "0" }
+        },
+        "pop-in": {
+          from: { transform: "scale(0)" },
+          to: { transform: "scale(1)" }
+        },
+        // Popovers grow from their Radix transform origin.
+        "menu-in": {
+          from: { opacity: "0", transform: "scale(0.96)" },
+          to: { opacity: "1", transform: "scale(1)" }
+        },
+        "menu-out": {
+          from: { opacity: "1", transform: "scale(1)" },
+          to: { opacity: "0", transform: "scale(0.98)" }
         }
       },
       animation: {
-        "accordion-down": "accordion-down 200ms ease-out",
-        "accordion-up": "accordion-up 200ms ease-out",
-        "collapsible-down": "collapsible-down 200ms ease-out",
-        "collapsible-up": "collapsible-up 200ms ease-out",
-        "side-panel-in": "side-panel-in 300ms cubic-bezier(0.32, 0.72, 0, 1)",
-        "side-panel-out": "side-panel-out 300ms cubic-bezier(0.32, 0.72, 0, 1)",
-        "fade-in": "fade-in 200ms ease-out",
-        "fade-out": "fade-out 200ms ease-out"
+        "accordion-down": `accordion-down ${motion.duration.base} ${motion.easing.outSoft}`,
+        "accordion-up": `accordion-up ${motion.duration.fast} ${motion.easing.outSoft}`,
+        "collapsible-down": `collapsible-down ${motion.duration.base} ${motion.easing.outSoft}`,
+        "collapsible-up": `collapsible-up ${motion.duration.fast} ${motion.easing.outSoft}`,
+        "side-panel-in": `side-panel-in ${motion.duration.slow} ${motion.easing.drawer}`,
+        "side-panel-out": `side-panel-out ${motion.duration.base} ${motion.easing.drawer}`,
+        "fade-in": `fade-in ${motion.duration.base} ${motion.easing.outSoft}`,
+        "fade-out": `fade-out ${motion.duration.fast} ${motion.easing.outSoft}`,
+        "dialog-in": `dialog-in ${motion.duration.base} ${motion.easing.spring}`,
+        "dialog-out": `dialog-out ${motion.duration.fast} ${motion.easing.outSoft}`,
+        "content-in": `content-in ${motion.duration.base} ${motion.easing.outSoft} both`,
+        "check-draw": `check-draw ${motion.duration.base} ${motion.easing.outSoft} both`,
+        "pop-in": `pop-in ${motion.duration.base} ${motion.easing.spring} both`,
+        "menu-in": `menu-in ${motion.duration.base} ${motion.easing.spring}`,
+        "menu-out": `menu-out ${motion.duration.fast} ${motion.easing.outSoft}`
       }
     }
   }

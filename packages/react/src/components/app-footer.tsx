@@ -75,7 +75,7 @@ const AppFooter = React.forwardRef<HTMLElement, AppFooterProps>(
                     <a
                       href={application.href}
                       aria-label={`Ouvrir ${application.title}`}
-                      className="flex min-h-11 items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 [&_img]:h-7 [&_img]:w-7 [&_img]:shrink-0 [&_img]:object-contain [&_svg]:h-7 [&_svg]:w-7 [&_svg]:shrink-0"
+                      className="flex min-h-11 items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-sm font-medium text-foreground shadow-sm transition-colors duration-fast ease-out-soft hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 [&_img]:h-7 [&_img]:w-7 [&_img]:shrink-0 [&_img]:object-contain [&_svg]:h-7 [&_svg]:w-7 [&_svg]:shrink-0"
                     >
                       <span aria-hidden="true" className="flex shrink-0">
                         {application.icon}
@@ -95,7 +95,7 @@ const AppFooter = React.forwardRef<HTMLElement, AppFooterProps>(
             target="_blank"
             rel="noopener noreferrer"
             aria-label={brandLabel}
-            className="rounded-md transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="rounded-md transition-opacity duration-fast ease-out-soft hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
             <img
               src={logoSrc}
@@ -116,7 +116,7 @@ const AppFooter = React.forwardRef<HTMLElement, AppFooterProps>(
               href={copyrightHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-sm text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="rounded-sm text-sm text-muted-foreground transition-colors duration-fast ease-out-soft hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               © {new Date().getFullYear()} {copyrightHolder}
             </a>

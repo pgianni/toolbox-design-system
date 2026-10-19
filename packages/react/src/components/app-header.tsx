@@ -16,7 +16,7 @@ import {
 } from "./nav-item-styles";
 
 export const appHeaderVariants = cva(
-  "sticky top-0 z-40 w-full border-b border-border bg-card/95 transition-[border-color] duration-200 motion-reduce:transition-none text-foreground backdrop-blur supports-[backdrop-filter]:bg-card/90",
+  "sticky top-0 z-40 w-full border-b border-border bg-card/95 transition-[border-color] duration-base ease-out-soft motion-reduce:transition-none text-foreground backdrop-blur supports-[backdrop-filter]:bg-card/90",
   {
     variants: {
       density: {
@@ -104,7 +104,7 @@ const AppHeader = React.forwardRef<HTMLElement, AppHeaderProps>(
           className={cn(
             appHeaderInnerVariants({ density, contained }),
             collapseOnScroll &&
-              "transition-[height,padding] duration-200 motion-reduce:transition-none",
+              "transition-[height,padding] duration-base ease-out-soft motion-reduce:transition-none",
             collapsed && density === "comfortable" && "h-12",
             innerClassName
           )}
@@ -144,7 +144,7 @@ const AppHeaderBrand = React.forwardRef<HTMLButtonElement, AppHeaderBrandProps>(
         ref={ref}
         type={asChild ? undefined : type}
         className={cn(
-          "inline-flex h-10 min-w-0 shrink-0 items-center gap-2 rounded-lg px-2 text-left transition-colors hover:bg-accent/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=open]:bg-accent/70",
+          "inline-flex h-10 min-w-0 shrink-0 items-center gap-2 rounded-lg px-2 text-left transition-colors duration-fast ease-out-soft hover:bg-accent/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=open]:bg-accent/70",
           className
         )}
         {...props}
@@ -326,7 +326,7 @@ function AppSwitcher({
         <DropdownMenuItem asChild className={cn("p-0", appSwitcherLinkStateClassName)}>
           <a
             href={allAppsHref}
-            className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm font-semibold outline-none transition-colors"
+            className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-sm font-semibold outline-none transition-colors duration-fast ease-out-soft animate-content-in motion-reduce:animate-none"
           >
             <GridIcon />
             <span>{allAppsLabel}</span>
@@ -334,7 +334,9 @@ function AppSwitcher({
         </DropdownMenuItem>
         <DropdownMenuSeparator className="mx-0 my-0" />
         <div className="pt-1">
-          {applications.map((application) => {
+          {applications.map((application, index) => {
+            // Rows settle in one after another as the menu opens.
+            const rowStyle = { animationDelay: `${(index + 1) * 20}ms` };
             const content = (
               <>
                 <span className="flex h-[38px] w-[38px] shrink-0 items-center justify-center [&_img]:h-[38px] [&_img]:w-[38px] [&_img]:object-contain [&_svg]:h-7 [&_svg]:w-7">
@@ -353,7 +355,7 @@ function AppSwitcher({
               </>
             );
             const rowClassName = cn(
-              "flex w-full items-start gap-3 rounded-md px-3 py-2 text-left outline-none transition-colors",
+              "flex w-full items-start gap-3 rounded-md px-3 py-2 text-left outline-none transition-colors duration-fast ease-out-soft animate-content-in motion-reduce:animate-none",
               application.current && "bg-primary/10"
             );
 
@@ -373,6 +375,7 @@ function AppSwitcher({
                     href={application.href}
                     aria-current={application.current ? "page" : undefined}
                     className={rowClassName}
+                    style={rowStyle}
                   >
                     {content}
                   </a>
@@ -386,6 +389,7 @@ function AppSwitcher({
                 disabled
                 aria-current={application.current ? "page" : undefined}
                 className={cn(rowClassName, "opacity-100")}
+                style={rowStyle}
               >
                 {content}
               </DropdownMenuItem>
@@ -437,7 +441,7 @@ const MobileBottomNav = React.forwardRef<HTMLElement, MobileBottomNavProps>(
 MobileBottomNav.displayName = "MobileBottomNav";
 
 export const mobileBottomNavItemVariants = cva(
-  "relative flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-lg px-1 py-1 text-center text-xs font-medium text-muted-foreground transition-[color,background-color,transform] duration-150 hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring active:scale-[0.98] motion-reduce:transform-none [&_svg]:h-5 [&_svg]:w-5 [&_svg]:shrink-0",
+  "relative flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-lg px-1 py-1 text-center text-xs font-medium text-muted-foreground transition-[color,background-color,transform] duration-fast ease-out-soft hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring active:scale-[0.98] motion-reduce:transform-none [&_svg]:h-5 [&_svg]:w-5 [&_svg]:shrink-0",
   {
     variants: {
       active: {

@@ -9,7 +9,7 @@ const DialogPortal = DialogPrimitive.Portal;
 const DialogClose = DialogPrimitive.Close;
 
 const dialogContentVariants = cva(
-  "fixed left-1/2 top-1/2 z-50 max-h-[calc(100vh-2rem)] w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-background text-foreground shadow-lg outline-none transition duration-200 data-[state=closed]:scale-95 data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100",
+  "fixed left-1/2 top-1/2 z-50 max-h-[calc(100vh-2rem)] w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-background text-foreground shadow-lg outline-none data-[state=open]:animate-dialog-in data-[state=closed]:animate-dialog-out motion-reduce:animate-none",
   {
     variants: {
       size: {
@@ -39,9 +39,10 @@ const dialogContentVariants = cva(
   }
 );
 
-// Shared with AlertDialog so both overlays look the same.
+// Shared with AlertDialog so both overlays look the same. Open/close use CSS
+// animations rather than transitions: Radix waits for animations before unmounting.
 export const dialogOverlayClassName =
-  "fixed inset-0 z-50 bg-slate-200/70 dark:bg-slate-800/70 transition-opacity duration-200 data-[state=closed]:opacity-0 data-[state=open]:opacity-100";
+  "fixed inset-0 z-50 bg-slate-200/70 dark:bg-slate-800/70 data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out motion-reduce:animate-none";
 export const dialogHeaderClassName = "flex flex-col gap-1.5 text-center sm:text-left";
 export const dialogFooterClassName =
   "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end";
@@ -125,7 +126,7 @@ const DialogContent = React.forwardRef<
           </DialogLayoutContext.Provider>
           {showClose ? (
             <DialogPrimitive.Close
-              className="absolute right-3 top-3 inline-flex h-10 w-10 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none"
+              className="absolute right-3 top-3 inline-flex h-10 w-10 items-center justify-center rounded-full text-muted-foreground transition-colors duration-fast ease-out-soft hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none"
             >
               <CloseIcon />
               <span className="sr-only">{closeLabel}</span>

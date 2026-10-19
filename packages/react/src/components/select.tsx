@@ -73,7 +73,7 @@ const SelectContent = React.forwardRef<
       position={position}
       sideOffset={position === "popper" ? sideOffset : undefined}
       className={cn(
-        "relative z-50 max-h-[--radix-select-content-available-height] min-w-32 overflow-hidden rounded-lg border bg-popover text-popover-foreground shadow-md outline-none transition duration-150 data-[state=closed]:scale-95 data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100",
+        "relative z-50 max-h-[--radix-select-content-available-height] min-w-32 overflow-hidden rounded-lg border bg-popover text-popover-foreground shadow-md outline-none origin-[--radix-select-content-transform-origin] data-[state=open]:animate-menu-in data-[state=closed]:animate-menu-out motion-reduce:animate-none",
         position === "popper" && "w-full min-w-[var(--radix-select-trigger-width)]",
         className
       )}
@@ -109,7 +109,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-default select-none items-center gap-2 rounded-md py-1.5 pl-2 pr-8 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[state=checked]:font-medium data-[state=checked]:text-action-foreground data-[disabled]:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+      "relative flex w-full cursor-default select-none items-center gap-2 rounded-md py-1.5 pl-2 pr-8 text-sm outline-none transition-colors duration-fast ease-out-soft focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[state=checked]:font-medium data-[state=checked]:text-action-foreground data-[disabled]:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
       className
     )}
     {...props}

@@ -25,7 +25,7 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex flex-1 items-center justify-between gap-4 rounded-lg px-3 py-3 text-left font-medium ring-offset-background transition-[color,background-color,transform] duration-150 hover:bg-primary/5 active:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=open]:text-action-foreground [&[data-state=open]>svg]:rotate-180 [&[data-state=open]>svg]:text-action-foreground",
+        "flex flex-1 items-center justify-between gap-4 rounded-lg px-3 py-3 text-left font-medium ring-offset-background transition-[color,background-color,transform] duration-fast ease-out-soft hover:bg-primary/5 active:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=open]:text-action-foreground [&[data-state=open]>svg]:rotate-180 [&[data-state=open]>svg]:text-action-foreground",
         navItemPressClassName,
         className
       )}
@@ -48,7 +48,14 @@ const AccordionContent = React.forwardRef<
     className="overflow-hidden text-sm text-muted-foreground data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down motion-reduce:animate-none"
     {...props}
   >
-    <div className={cn("px-3 pb-4 pt-1", className)}>{children}</div>
+    <div
+      className={cn(
+        "animate-content-in px-3 pb-4 pt-1 motion-reduce:animate-none",
+        className
+      )}
+    >
+      {children}
+    </div>
   </AccordionPrimitive.Content>
 ));
 AccordionContent.displayName = AccordionPrimitive.Content.displayName;
@@ -57,7 +64,7 @@ function ChevronDownIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 motion-reduce:transition-none"
+      className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-base ease-spring motion-reduce:transition-none"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

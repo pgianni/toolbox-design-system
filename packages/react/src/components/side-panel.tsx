@@ -127,7 +127,7 @@ const SidePanelContent = React.forwardRef<
             <div className="absolute right-4 top-4 z-10 flex h-8 items-center gap-1">
               {actions}
               {showClose ? (
-                <DialogPrimitive.Close className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-background text-muted-foreground shadow-sm transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                <DialogPrimitive.Close className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-background text-muted-foreground shadow-sm transition-colors duration-fast ease-out-soft hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                   <CloseIcon />
                   <span className="sr-only">{closeLabel}</span>
                 </DialogPrimitive.Close>
