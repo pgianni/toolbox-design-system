@@ -12,9 +12,10 @@ export const buttonVariants = cva(
         default: "bg-primary text-primary-foreground hover:bg-primary/90 active:translate-y-0.5",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 active:translate-y-0.5",
         secondary:
-          "border border-action-foreground bg-secondary text-action-foreground hover:bg-secondary/80 hover:text-action-foreground active:translate-y-0.5",
+          "border border-input bg-background text-action-foreground hover:bg-accent hover:text-action-foreground active:translate-y-0.5",
+        // No border or background at rest; the icon is a lighter grey than the label.
         tertiary:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground active:translate-y-0.5",
+          "border border-transparent bg-transparent hover:bg-accent hover:text-accent-foreground active:translate-y-0.5 [&_svg]:text-muted-foreground",
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground active:translate-y-0.5",
         ghost:
@@ -26,7 +27,7 @@ export const buttonVariants = cva(
         purple: "rounded-full bg-primary text-primary-foreground hover:bg-primary/90 active:translate-y-0.5",
         save: "rounded-full bg-primary text-primary-foreground hover:bg-primary/90 active:translate-y-0.5",
         "brand-outline":
-          "border border-action-foreground bg-secondary text-action-foreground hover:bg-secondary/80 hover:text-action-foreground active:translate-y-0.5",
+          "border border-input bg-background text-action-foreground hover:bg-accent hover:text-action-foreground active:translate-y-0.5",
         "brand-ghost": "rounded-full text-primary hover:bg-primary/10 dark:hover:bg-primary/20"
       },
       size: {
@@ -43,12 +44,43 @@ export const buttonVariants = cva(
         rounded: "rounded-md",
         pill: "rounded-full",
         square: "rounded-none"
+      },
+      // Red treatment for destructive actions, combined with any variant.
+      danger: {
+        true: null,
+        false: null
       }
     },
+    compoundVariants: [
+      {
+        variant: ["primary", "default", "brand", "purple", "save"],
+        danger: true,
+        className: "bg-destructive text-destructive-foreground hover:bg-destructive/90"
+      },
+      {
+        // red-600 / red-400 keep the label readable in both themes.
+        variant: ["secondary", "brand-outline", "outline"],
+        danger: true,
+        className:
+          "border-red-600/40 text-red-600 hover:bg-red-600/10 hover:text-red-600 dark:border-red-400/40 dark:text-red-400 dark:hover:bg-red-400/10 dark:hover:text-red-400"
+      },
+      {
+        variant: ["tertiary", "ghost", "brand-ghost"],
+        danger: true,
+        className:
+          "text-red-600 hover:bg-red-600/10 hover:text-red-600 dark:text-red-400 dark:hover:bg-red-400/10 dark:hover:text-red-400 [&_svg]:text-current"
+      },
+      {
+        variant: "link",
+        danger: true,
+        className: "text-red-600 dark:text-red-400"
+      }
+    ],
     defaultVariants: {
       variant: "default",
       size: "default",
-      shape: "pill"
+      shape: "pill",
+      danger: false
     }
   }
 );
@@ -60,13 +92,13 @@ export interface ButtonProps
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, shape, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, shape, danger, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
 
     return (
       <Comp
         ref={ref}
-        className={cn(buttonVariants({ variant, size, shape }), className)}
+        className={cn(buttonVariants({ variant, size, shape, danger }), className)}
         {...props}
       />
     );

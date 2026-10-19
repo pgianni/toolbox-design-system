@@ -110,10 +110,10 @@ export interface AlertDialogActionProps
 const AlertDialogAction = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Action>,
   AlertDialogActionProps
->(({ className, variant, size, shape, ...props }, ref) => (
+>(({ className, variant, size, shape, danger, ...props }, ref) => (
   <AlertDialogPrimitive.Action
     ref={ref}
-    className={cn(buttonVariants({ variant, size, shape }), className)}
+    className={cn(buttonVariants({ variant, size, shape, danger }), className)}
     {...props}
   />
 ));
@@ -126,10 +126,10 @@ export interface AlertDialogCancelProps
 const AlertDialogCancel = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Cancel>,
   AlertDialogCancelProps
->(({ className, variant = "outline", size, shape, ...props }, ref) => (
+>(({ className, variant = "outline", size, shape, danger, ...props }, ref) => (
   <AlertDialogPrimitive.Cancel
     ref={ref}
-    className={cn(buttonVariants({ variant, size, shape }), className)}
+    className={cn(buttonVariants({ variant, size, shape, danger }), className)}
     {...props}
   />
 ));

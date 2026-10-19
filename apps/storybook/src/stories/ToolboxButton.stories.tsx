@@ -157,9 +157,9 @@ export const Variants: Story = {
   play: async ({ canvas }) => {
     const button = canvas.getByRole("button", { name: /action du bouton/i });
     await expect(button.className).toContain("active:translate-y-0.5");
-    await expect(button.className).toContain("duration-150");
+    await expect(button.className).toContain("duration-fast");
     await expect(buttonVariants({ variant: "secondary" })).toContain(
-      "border-action-foreground"
+      "border-input"
     );
     await expect(buttonVariants({ variant: "secondary" })).toContain(
       "text-action-foreground"
