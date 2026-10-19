@@ -1,5 +1,24 @@
 # @pgianni/toolbox-react
 
+## 0.8.1
+
+### Patch Changes
+
+- 796d1ef: `AccordionTrigger` gets hover, pressed and open states: a light `primary` tint on hover (stronger while pressed),
+  the shared press translate on click, and `action-foreground` text and chevron
+  when open. Trigger and content are padded (`px-3`) so the hover background
+  has room.
+- 08fd83b: AppSwitcher links ("Toutes les applications" and each application) show a
+  pointer cursor, a light `primary` tint on hover and keyboard highlight, and a
+  stronger tint while pressed. The current application keeps its tint and
+  darkens on hover.
+  The "Toutes les applications" link no longer shows a focus ring when hovered:
+  like the application rows, focus is shown by the highlight tint.
+  The space under the last application is reduced to the menu's own padding.
+- 6ac6d9c: Tabs `page` triggers get a light `primary` tint on hover, a stronger one while
+  pressed and the shared press translate, like `Accordion`. The previous
+  `bg-accent` hover was invisible on the app background.
+
 ## 0.8.0
 
 ### Minor Changes
