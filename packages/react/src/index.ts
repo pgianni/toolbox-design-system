@@ -256,3 +256,12 @@ export {
 } from "./components/number-input";
 export { SearchInput, type SearchInputProps } from "./components/search-input";
 export type { ControlSize } from "./components/control-sizes";
+export {
+  Popover,
+  PopoverTrigger,
+  PopoverAnchor,
+  PopoverClose,
+  PopoverContent
+} from "./components/popover";
+export { Calendar, type CalendarProps } from "./components/calendar";
+export { DatePicker, type DatePickerProps } from "./components/date-picker";
