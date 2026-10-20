@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import {
-  AppHeaderNav,
-  AppHeaderNavItem,
+  TabsNav,
+  TabsNavLink,
   MobileBottomNav,
   MobileBottomNavItem,
   SegmentedControl,
@@ -55,10 +55,16 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
   );
 }
 
-function TabsRow({ variant }: { variant: "default" | "page" }) {
+function TabsRow({
+  variant,
+  container = true
+}: {
+  variant: "default" | "page";
+  container?: boolean;
+}) {
   return (
-    <Tabs variant={variant} defaultValue={items[0]}>
-      <TabsList aria-label={`Tabs ${variant}`}>
+    <Tabs variant={variant} container={container} defaultValue={items[0]}>
+      <TabsList aria-label={container ? `Tabs ${variant}` : `Tabs ${variant} sans conteneur`}>
         {items.map((item) => (
           <TabsTrigger key={item} value={item}>
             {item}
@@ -74,21 +80,24 @@ function Comparison() {
 
   return (
     <div className="flex flex-col gap-6 rounded-xl border border-border bg-card p-6 text-foreground">
-      <Row label="AppHeaderNav">
-        <AppHeaderNav showFrom="sm" aria-label="Navigation principale">
+      <Row label="TabsNav (header)">
+        <TabsNav showFrom="sm" aria-label="Navigation principale">
           {items.map((item) => (
-            <AppHeaderNavItem
+            <TabsNavLink
               key={item}
               active={activeItem === item}
               onClick={() => setActiveItem(item)}
             >
               {item}
-            </AppHeaderNavItem>
+            </TabsNavLink>
           ))}
-        </AppHeaderNav>
+        </TabsNav>
       </Row>
       <Row label="Tabs">
         <TabsRow variant="default" />
+      </Row>
+      <Row label="Tabs sans conteneur">
+        <TabsRow variant="default" container={false} />
       </Row>
       <Row label="SegmentedControl">
         <SegmentedControl

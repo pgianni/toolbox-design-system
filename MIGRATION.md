@@ -70,3 +70,21 @@ Pour repérer les usages restants dans une application :
 ```bash
 grep -rnE 'variant="(default|brand|purple|save|gradient|destructive|brand-outline|brand-ghost)"|<Badge' src
 ```
+
+### `AppHeaderNav` → `TabsNav`
+
+La navigation du header fait désormais partie de la famille Tabs. `AppHeaderNav` et `AppHeaderNavItem` restent disponibles (avec un avertissement en développement) mais rendent maintenant `TabsNav` et `TabsNavLink`.
+
+| Avant | Après |
+|---|---|
+| `<AppHeaderNav showFrom="lg">` | `<TabsNav showFrom="lg">` (`AppHeaderNav` valait `lg` par défaut, `TabsNav` est toujours visible si `showFrom` est omis) |
+| `<AppHeaderNavItem active>` | `<TabsNavLink active>` |
+| `<AppHeaderNavItem asChild><Link …/></AppHeaderNavItem>` | `<TabsNavLink asChild><Link …/></TabsNavLink>` ou `<TabsNavLink href="…">` |
+| `appHeaderNavItemVariants` | `tabsNavLinkVariants` |
+
+Choisir entre les deux modes de la famille :
+
+- `Tabs` / `TabsList` / `TabsTrigger` changent de panneau dans une page (onglets, flèches du clavier). `container={false}` retire le cadre.
+- `TabsNav` / `TabsNavLink` naviguent entre des pages : de vrais liens dans un `<nav>`, avec `aria-current="page"` sur la page courante. `container` ajoute le cadre si besoin.
+
+Les deux ont exactement le même rendu.

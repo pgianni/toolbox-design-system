@@ -108,6 +108,28 @@ export const Authentication: Story = {
   )
 };
 
+export const WithoutContainer: Story = {
+  name: "Sans conteneur",
+  render: () => (
+    <Tabs container={false} defaultValue="overview" className="w-[480px] max-w-full">
+      <TabsList aria-label="Sections du projet">
+        <TabsTrigger value="overview">Vue d’ensemble</TabsTrigger>
+        <TabsTrigger value="activity">Activité</TabsTrigger>
+        <TabsTrigger value="settings">Paramètres</TabsTrigger>
+      </TabsList>
+      <TabsContent value="overview" className="rounded-md border bg-card p-4">
+        Même rendu que la navigation du header, pour des sections dans la page.
+      </TabsContent>
+      <TabsContent value="activity" className="rounded-md border bg-card p-4">
+        L’activité récente du projet.
+      </TabsContent>
+      <TabsContent value="settings" className="rounded-md border bg-card p-4">
+        Les paramètres du projet.
+      </TabsContent>
+    </Tabs>
+  )
+};
+
 export const PageNavigation: Story = {
   render: () => (
     <Tabs variant="page" defaultValue="all" className="w-[560px] max-w-full">

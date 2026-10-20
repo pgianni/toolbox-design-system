@@ -3,6 +3,9 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib";
 import { Button } from "./button";
+import { mobileBreakpointClassNames, type Breakpoint } from "./breakpoints";
+import { TabsNav, TabsNavLink, tabsNavLinkVariants } from "./tabs";
+import { warnDeprecated } from "../deprecation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,9 +14,7 @@ import {
   DropdownMenuTrigger
 } from "./dropdown-menu";
 import {
-  navItemActiveClassName,
-  navItemBaseClassName,
-  navItemPillClassName
+  navItemActiveClassName
 } from "./nav-item-styles";
 
 export const appHeaderVariants = cva(
@@ -195,83 +196,45 @@ const AppHeaderBrandName = React.forwardRef<
 ));
 AppHeaderBrandName.displayName = "AppHeaderBrandName";
 
-const desktopBreakpointClassNames = {
-  sm: "sm:flex",
-  md: "md:flex",
-  lg: "lg:flex",
-  xl: "xl:flex"
-} as const;
-
-const mobileBreakpointClassNames = {
-  sm: "sm:hidden",
-  md: "md:hidden",
-  lg: "lg:hidden",
-  xl: "xl:hidden"
-} as const;
-
-export type AppHeaderBreakpoint = keyof typeof desktopBreakpointClassNames;
+export type AppHeaderBreakpoint = Breakpoint;
 
 export interface AppHeaderNavProps
   extends React.HTMLAttributes<HTMLElement> {
   showFrom?: AppHeaderBreakpoint;
 }
 
+/** @deprecated Use `TabsNav` with `showFrom` (see MIGRATION.md). */
 const AppHeaderNav = React.forwardRef<HTMLElement, AppHeaderNavProps>(
-  ({ className, showFrom = "lg", ...props }, ref) => (
-    <nav
-      ref={ref}
-      className={cn(
-        "hidden min-w-0 items-center",
-        desktopBreakpointClassNames[showFrom],
-        className
-      )}
-      {...props}
-    />
-  )
+  ({ showFrom = "lg", ...props }, ref) => {
+    warnDeprecated('AppHeaderNav est remplacé par <TabsNav showFrom="lg">.');
+    return <TabsNav ref={ref} showFrom={showFrom} {...props} />;
+  }
 );
 AppHeaderNav.displayName = "AppHeaderNav";
 
-export const appHeaderNavItemVariants = cva(
-  cn(
-    "relative border border-transparent",
-    navItemBaseClassName,
-    navItemPillClassName
-  ),
-  {
-    variants: {
-      active: {
-        true: navItemActiveClassName,
-        false: ""
-      }
-    },
-    defaultVariants: {
-      active: false
-    }
-  }
-);
+/** @deprecated Use `tabsNavLinkVariants`. */
+export const appHeaderNavItemVariants = tabsNavLinkVariants;
 
 export interface AppHeaderNavItemProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof appHeaderNavItemVariants> {
+    VariantProps<typeof tabsNavLinkVariants> {
   asChild?: boolean;
 }
 
-const AppHeaderNavItem = React.forwardRef<
-  HTMLButtonElement,
-  AppHeaderNavItemProps
->(({ className, active = false, asChild = false, type = "button", ...props }, ref) => {
-  const Comp = asChild ? Slot : "button";
-
-  return (
-    <Comp
-      ref={ref}
-      type={asChild ? undefined : type}
-      aria-current={active ? "page" : undefined}
-      className={cn(appHeaderNavItemVariants({ active }), className)}
-      {...props}
-    />
-  );
-});
+/** @deprecated Use `TabsNavLink` (see MIGRATION.md). */
+const AppHeaderNavItem = React.forwardRef<HTMLButtonElement, AppHeaderNavItemProps>(
+  ({ active = false, asChild = false, ...props }, ref) => {
+    warnDeprecated("AppHeaderNavItem est remplacé par <TabsNavLink>.");
+    return (
+      <TabsNavLink
+        ref={ref as React.Ref<HTMLElement>}
+        active={active}
+        asChild={asChild}
+        {...(props as React.ComponentProps<typeof TabsNavLink>)}
+      />
+    );
+  }
+);
 AppHeaderNavItem.displayName = "AppHeaderNavItem";
 
 // Header buttons shared by every toolbox app. They take no className or style

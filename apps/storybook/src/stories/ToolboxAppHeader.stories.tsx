@@ -9,8 +9,8 @@ import {
   AppHeaderThemeToggle,
   AppHeaderBrandLogo,
   AppHeaderBrandName,
-  AppHeaderNav,
-  AppHeaderNavItem,
+  TabsNav,
+  TabsNavLink,
   AppHeaderSection,
   AppSwitcher,
   Button,
@@ -183,14 +183,14 @@ function SatelliteHeader({
     <AppHeader>
       <AppHeaderSection>
         <BrandSwitcher />
-        <AppHeaderNav aria-label="Navigation principale" showFrom="lg">
+        <TabsNav aria-label="Navigation principale" showFrom="lg">
           {navItems.map((item, index) => (
-            <AppHeaderNavItem key={item.id} active={index === 0}>
+            <TabsNavLink key={item.id} active={index === 0}>
               <item.icon />
               <span>{item.label}</span>
-            </AppHeaderNavItem>
+            </TabsNavLink>
           ))}
-        </AppHeaderNav>
+        </TabsNav>
       </AppHeaderSection>
       <HeaderActions signedIn={signedIn} language={language} />
     </AppHeader>
@@ -230,18 +230,18 @@ function ResponsiveSatelliteNavigationExample() {
       <AppHeader>
         <AppHeaderSection>
           <BrandSwitcher />
-          <AppHeaderNav aria-label="Navigation responsive satellite" showFrom="lg">
+          <TabsNav aria-label="Navigation responsive satellite" showFrom="lg">
             {navItems.map((item) => (
-              <AppHeaderNavItem
+              <TabsNavLink
                 key={item.id}
                 active={item.id === activeId}
                 onClick={() => setActiveId(item.id)}
               >
                 <item.icon />
                 <span>{item.label}</span>
-              </AppHeaderNavItem>
+              </TabsNavLink>
             ))}
-          </AppHeaderNav>
+          </TabsNav>
         </AppHeaderSection>
         <HeaderActions />
       </AppHeader>
@@ -332,18 +332,18 @@ function ResponsivePortalNavigationExample() {
       <AppHeader density="comfortable" contained>
         <AppHeaderSection className="gap-6">
           <PortalBrand />
-          <AppHeaderNav aria-label="Navigation responsive du portail" showFrom="xl">
+          <TabsNav aria-label="Navigation responsive du portail" showFrom="xl">
             {portalNavItems.map((item) => (
-              <AppHeaderNavItem
+              <TabsNavLink
                 key={item.id}
                 active={item.id === activeId}
                 onClick={() => setActiveId(item.id)}
               >
                 <item.icon />
                 <span>{item.label}</span>
-              </AppHeaderNavItem>
+              </TabsNavLink>
             ))}
-          </AppHeaderNav>
+          </TabsNav>
         </AppHeaderSection>
         <HeaderActions />
       </AppHeader>
@@ -485,14 +485,14 @@ export const PortalDesktop: Story = {
       >
         <AppHeaderSection className="gap-6">
           <PortalBrand />
-          <AppHeaderNav aria-label="Navigation du portail" showFrom="xl">
+          <TabsNav aria-label="Navigation du portail" showFrom="xl">
             {portalNavItems.map((item, index) => (
-              <AppHeaderNavItem key={item.id} active={index === 0}>
+              <TabsNavLink key={item.id} active={index === 0}>
                 <item.icon />
                 <span>{item.label}</span>
-              </AppHeaderNavItem>
+              </TabsNavLink>
             ))}
-          </AppHeaderNav>
+          </TabsNav>
         </AppHeaderSection>
         <HeaderActions />
       </AppHeader>
