@@ -1,5 +1,36 @@
 # @pgianni/toolbox-react
 
+## 0.15.0
+
+### Minor Changes
+
+- afccf81: Add `AppHeaderThemeToggle` and `AppHeaderSignIn`, so every toolbox app shows
+  the same header buttons instead of styling its own:
+  
+  - `AppHeaderThemeToggle`: grey round icon button (tertiary, `sm`) with a sun
+    in light mode and a moon in dark mode.
+  - `AppHeaderSignIn`: outline `sm` button with a log-in icon; `href` renders a
+    link to the sign-in page.
+  
+  Neither accepts `className` or `style`. Only `label` can change (accessible
+  name for the toggle, text for sign-in), e.g. "Toggle theme" / "Sign in" in
+  English. They keep the usual button props (`onClick`, `disabled`…).
+- 037df0d: Toasts stay above the mobile tab bar. `MobileBottomNav` publishes its visible
+  height on `<html>` as `--toolbox-bottom-nav-height` (0 px while hidden by its
+  breakpoint, removed when unmounted; the name is exported as
+  `mobileBottomNavHeightVariable`), and `Toaster` adds it to its bottom
+  `offset` and `mobileOffset` unless you set your own bottom offset.
+
+### Patch Changes
+
+- 2397ec5: Fix `className` overrides of `Button` hover styles (e.g.
+  `hover:text-foreground` on a ghost icon button) being ignored since 0.13: the
+  hover and press styles were scoped to `:not(:disabled)`, which made them more
+  specific than the app's classes, so a ghost button turned violet on hover. They
+  are plain `hover:`/`active:` classes again, and disabled buttons cancel them
+  with `disabled:` resets, so the not-allowed cursor and the static look of
+  disabled buttons are kept.
+
 ## 0.14.1
 
 ### Patch Changes
