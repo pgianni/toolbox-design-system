@@ -5,6 +5,8 @@ import {
   AppHeader,
   AppHeaderActions,
   AppHeaderBrand,
+  AppHeaderSignIn,
+  AppHeaderThemeToggle,
   AppHeaderBrandLogo,
   AppHeaderBrandName,
   AppHeaderNav,
@@ -50,15 +52,6 @@ const TemplateIcon = () => (
 );
 const SparklesIcon = () => (
   <Glyph><path d="m12 3-1.4 3.6L7 8l3.6 1.4L12 13l1.4-3.6L17 8l-3.6-1.4Z" /><path d="m5 14-.8 2.2L2 17l2.2.8L5 20l.8-2.2L8 17l-2.2-.8ZM19 14l-.8 2.2L16 17l2.2.8L19 20l.8-2.2L22 17l-2.2-.8Z" /></Glyph>
-);
-const SunIcon = () => (
-  <Glyph><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41" /></Glyph>
-);
-const MoonIcon = () => (
-  <Glyph><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" /></Glyph>
-);
-const LogInIcon = () => (
-  <Glyph><path d="M10 17l5-5-5-5M15 12H3M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" /></Glyph>
 );
 const LogOutIcon = () => (
   <Glyph><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" /></Glyph>
@@ -142,18 +135,18 @@ function BrandSwitcher() {
   );
 }
 
-function HeaderActions({ signedIn = true }: { signedIn?: boolean }) {
+function HeaderActions({
+  signedIn = true,
+  language = "fr"
+}: {
+  signedIn?: boolean;
+  language?: "fr" | "en";
+}) {
+  const english = language === "en";
+
   return (
     <AppHeaderActions>
-      <Button
-        variant="ghost"
-        size="icon-md"
-        aria-label="Changer de thème"
-        className="relative text-muted-foreground hover:bg-muted hover:text-foreground"
-      >
-        <span className="block dark:hidden"><SunIcon /></span>
-        <span className="hidden dark:block"><MoonIcon /></span>
-      </Button>
+      <AppHeaderThemeToggle label={english ? "Toggle theme" : undefined} />
       {signedIn ? (
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
@@ -173,16 +166,19 @@ function HeaderActions({ signedIn = true }: { signedIn?: boolean }) {
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <Button variant="outline" size="sm">
-          <LogInIcon />
-          <span>Se connecter</span>
-        </Button>
+        <AppHeaderSignIn label={english ? "Sign in" : undefined} />
       )}
     </AppHeaderActions>
   );
 }
 
-function SatelliteHeader({ signedIn = true }: { signedIn?: boolean }) {
+function SatelliteHeader({
+  signedIn = true,
+  language = "fr"
+}: {
+  signedIn?: boolean;
+  language?: "fr" | "en";
+}) {
   return (
     <AppHeader>
       <AppHeaderSection>
@@ -196,7 +192,7 @@ function SatelliteHeader({ signedIn = true }: { signedIn?: boolean }) {
           ))}
         </AppHeaderNav>
       </AppHeaderSection>
-      <HeaderActions signedIn={signedIn} />
+      <HeaderActions signedIn={signedIn} language={language} />
     </AppHeader>
   );
 }
@@ -447,6 +443,20 @@ export const SatelliteResponsiveNavigation: Story = {
     await userEvent.click(visibleTemplatesButton);
     await expect(canvas.getByRole("heading", { name: "Templates" })).toBeVisible();
     await expect(visibleTemplatesButton).toHaveAttribute("aria-current", "page");
+  }
+};
+
+export const SignedOutEnglish: Story = {
+  name: "Signed Out (English)",
+  render: () => (
+    <div className="min-h-screen bg-app-background">
+      <SatelliteHeader signedIn={false} language="en" />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("button", { name: "Sign in" })).toBeVisible();
+    await expect(canvas.getByRole("button", { name: "Toggle theme" })).toBeVisible();
   }
 };
 

@@ -2,6 +2,7 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib";
+import { Button } from "./button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -273,6 +274,76 @@ const AppHeaderNavItem = React.forwardRef<
 });
 AppHeaderNavItem.displayName = "AppHeaderNavItem";
 
+// Header buttons shared by every toolbox app. They take no className or style
+// so they look the same everywhere; only the label can change (e.g. English).
+type LockedButtonProps = Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "className" | "style" | "children" | "aria-label"
+>;
+
+export interface AppHeaderThemeToggleProps extends LockedButtonProps {
+  /** Accessible name. Defaults to "Changer de thème". */
+  label?: string;
+}
+
+/** Light/dark switch: grey round icon button showing a sun (light) or moon (dark). */
+const AppHeaderThemeToggle = React.forwardRef<HTMLButtonElement, AppHeaderThemeToggleProps>(
+  ({ label = "Changer de thème", type = "button", ...props }, ref) => (
+    <Button
+      ref={ref}
+      type={type}
+      variant="tertiary"
+      size="sm"
+      iconOnly
+      aria-label={label}
+      title={label}
+      {...props}
+    >
+      <span className="block dark:hidden">
+        <SunIcon />
+      </span>
+      <span className="hidden dark:block">
+        <MoonIcon />
+      </span>
+    </Button>
+  )
+);
+AppHeaderThemeToggle.displayName = "AppHeaderThemeToggle";
+
+export interface AppHeaderSignInProps extends LockedButtonProps {
+  /** Button text. Defaults to "Se connecter" (e.g. "Sign in" in English). */
+  label?: string;
+  /** Renders a link to the sign-in page instead of a button. */
+  href?: string;
+}
+
+/** "Se connecter" button for signed-out visitors: outline, with a log-in icon. */
+const AppHeaderSignIn = React.forwardRef<HTMLButtonElement, AppHeaderSignInProps>(
+  ({ label = "Se connecter", href, type = "button", ...props }, ref) => {
+    const content = (
+      <>
+        <LogInIcon />
+        <span>{label}</span>
+      </>
+    );
+
+    if (href) {
+      return (
+        <Button asChild variant="outline" size="sm">
+          <a href={href}>{content}</a>
+        </Button>
+      );
+    }
+
+    return (
+      <Button ref={ref} type={type} variant="outline" size="sm" {...props}>
+        {content}
+      </Button>
+    );
+  }
+);
+AppHeaderSignIn.displayName = "AppHeaderSignIn";
+
 export type AppHeaderActionsProps = React.HTMLAttributes<HTMLDivElement>;
 
 const AppHeaderActions = React.forwardRef<
@@ -520,6 +591,31 @@ const MobileBottomNavItem = React.forwardRef<
 });
 MobileBottomNavItem.displayName = "MobileBottomNavItem";
 
+function SunIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" />
+    </svg>
+  );
+}
+
+function LogInIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M10 17l5-5-5-5M15 12H3M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+    </svg>
+  );
+}
+
 function GridIcon() {
   return (
     <svg
@@ -541,6 +637,8 @@ function GridIcon() {
 }
 
 export {
+  AppHeaderThemeToggle,
+  AppHeaderSignIn,
   AppHeader,
   AppHeaderSection,
   AppHeaderBrand,
