@@ -415,6 +415,10 @@ export interface MobileBottomNavProps
   innerClassName?: string;
 }
 
+// Visible height of the mobile tab bar, published on <html> so floating UI
+// (toasts) can stay above it. 0px while the bar is hidden by its breakpoint.
+export const mobileBottomNavHeightVariable = "--toolbox-bottom-nav-height";
+
 const MobileBottomNav = React.forwardRef<HTMLElement, MobileBottomNavProps>(
   (
     {
@@ -425,9 +429,36 @@ const MobileBottomNav = React.forwardRef<HTMLElement, MobileBottomNavProps>(
       ...props
     },
     ref
-  ) => (
+  ) => {
+    const navRef = React.useRef<HTMLElement | null>(null);
+    const setRefs = React.useCallback(
+      (node: HTMLElement | null) => {
+        navRef.current = node;
+        if (typeof ref === "function") ref(node);
+        else if (ref) ref.current = node;
+      },
+      [ref]
+    );
+
+    React.useEffect(() => {
+      const nav = navRef.current;
+      if (!nav || typeof ResizeObserver === "undefined") return;
+      const root = document.documentElement;
+      const update = () => {
+        root.style.setProperty(mobileBottomNavHeightVariable, `${nav.getBoundingClientRect().height}px`);
+      };
+      update();
+      const observer = new ResizeObserver(update);
+      observer.observe(nav);
+      return () => {
+        observer.disconnect();
+        root.style.removeProperty(mobileBottomNavHeightVariable);
+      };
+    }, []);
+
+    return (
     <nav
-      ref={ref}
+      ref={setRefs}
       className={cn(
         "fixed inset-x-0 bottom-0 z-50 h-[calc(4.375rem+env(safe-area-inset-bottom))] border-t border-border bg-card/95 p-1 pb-[calc(env(safe-area-inset-bottom)+0.25rem)] backdrop-blur",
         mobileBreakpointClassNames[hideFrom],
@@ -444,7 +475,8 @@ const MobileBottomNav = React.forwardRef<HTMLElement, MobileBottomNavProps>(
         {children}
       </div>
     </nav>
-  )
+    );
+  }
 );
 MobileBottomNav.displayName = "MobileBottomNav";
 

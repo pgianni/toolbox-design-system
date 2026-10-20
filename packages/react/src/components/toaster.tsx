@@ -4,6 +4,17 @@ import { cn } from "../lib";
 
 export type ToasterProps = React.ComponentProps<typeof SonnerToaster>;
 
+type Offset = ToasterProps["offset"];
+
+// Lifts bottom toasts above MobileBottomNav, which publishes its visible
+// height in --toolbox-bottom-nav-height (0px or unset when it is hidden).
+function aboveBottomNav(offset: Offset, base: string): Offset {
+  const bottom = `calc(var(--toolbox-bottom-nav-height, 0px) + ${base})`;
+  if (offset === undefined) return { bottom };
+  if (typeof offset === "object" && offset.bottom === undefined) return { ...offset, bottom };
+  return offset;
+}
+
 function Toaster({
   className,
   theme = "system",
@@ -11,6 +22,8 @@ function Toaster({
   closeButton = true,
   richColors = true,
   toastOptions,
+  offset,
+  mobileOffset,
   ...props
 }: ToasterProps) {
   const classNames = toastOptions?.classNames;
@@ -21,6 +34,8 @@ function Toaster({
       position={position}
       closeButton={closeButton}
       richColors={richColors}
+      offset={aboveBottomNav(offset, "24px")}
+      mobileOffset={aboveBottomNav(mobileOffset, "16px")}
       className={cn("toaster group", className)}
       toastOptions={{
         ...toastOptions,

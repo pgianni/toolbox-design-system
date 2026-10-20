@@ -107,6 +107,7 @@ export {
   AppSwitcher,
   MobileBottomNav,
   MobileBottomNavItem,
+  mobileBottomNavHeightVariable,
   appHeaderVariants,
   appHeaderNavItemVariants,
   mobileBottomNavItemVariants,
