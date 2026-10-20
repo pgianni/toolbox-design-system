@@ -57,8 +57,9 @@ export const tagVariants = cva(
         outline: ""
       },
       size: {
-        sm: "h-5 px-2 text-[11px] [&_svg]:size-3",
-        md: "h-6 px-2.5 text-xs [&_svg]:size-3.5"
+        // A leading icon sits closer to the edge, so the left padding shrinks.
+        sm: "h-5 px-2 text-[11px] [&_svg]:size-3 has-[>span>svg:first-child]:pl-1.5",
+        md: "h-6 px-2.5 text-xs [&_svg]:size-3.5 has-[>span>svg:first-child]:pl-1.5"
       }
     },
     compoundVariants: (Object.keys(toneClassNames) as TagAppearance[]).flatMap(

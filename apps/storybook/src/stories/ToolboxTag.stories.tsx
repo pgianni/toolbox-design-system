@@ -43,6 +43,32 @@ function DotIcon() {
   );
 }
 
+// One icon per tone, shown before the label in the preview matrix.
+const toneIconPaths: Record<TagTone, string> = {
+  neutral: "M12 8v4l3 2M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z",
+  primary: "m12 3 2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2-5.4 3.2 1.3-6-4.6-4.1 6.1-.6Z",
+  info: "M12 11v5M12 8h.01M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z",
+  success: "m8 12 3 3 5-6M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z",
+  warning: "M10.3 4.3 2.6 18a2 2 0 0 0 1.7 3h15.4a2 2 0 0 0 1.7-3L13.7 4.3a2 2 0 0 0-3.4 0ZM12 9v4M12 17h.01",
+  danger: "m15 9-6 6M9 9l6 6M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z"
+};
+
+function ToneIcon({ tone }: { tone: TagTone }) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d={toneIconPaths[tone]} />
+    </svg>
+  );
+}
+
 export const Default: Story = {};
 
 function Matrix() {
@@ -72,13 +98,14 @@ function Matrix() {
               {appearances.map((appearance) => (
                 <td key={appearance}>
                   <Tag tone={tone} appearance={appearance}>
+                    <ToneIcon tone={tone} />
                     {tone}
                   </Tag>
                 </td>
               ))}
               <td>
                 <Tag tone={tone} size="sm">
-                  <DotIcon />
+                  <ToneIcon tone={tone} />
                   {tone}
                 </Tag>
               </td>
