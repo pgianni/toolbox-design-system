@@ -1,5 +1,28 @@
 # @pgianni/toolbox-react
 
+## 0.16.0
+
+### Minor Changes
+
+- 20b4a0d: `Tabs` (and `TabsList`) gain a `container` option. `true` (default) keeps the
+  bordered container around the pill tabs; `false` drops it so the tabs look
+  like `AppHeaderNav`, for in-page sections. `AppHeaderNav` stays the component
+  for site navigation (links with `aria-current`), while `Tabs` switch panels
+  inside a page.
+  
+  `AppHeaderNavItem` drops its transparent 1 px border so its items have exactly
+  the same size as tabs.
+- 20b4a0d: Merge the header navigation into the Tabs family:
+  
+  - New `TabsNav` and `TabsNavLink`: the navigation mode of Tabs, with the same
+    look but real navigation links in a `<nav>` (`aria-current="page"`).
+    `TabsNav` takes `container` (off by default) and `showFrom` (hidden below a
+    breakpoint); `TabsNavLink` renders an `<a>` with `href`, the child with
+    `asChild` (router links), or a `<button>`.
+  - `AppHeaderNav`, `AppHeaderNavItem` and `appHeaderNavItemVariants` are
+    deprecated aliases of `TabsNav` (`showFrom="lg"`), `TabsNavLink` and
+    `tabsNavLinkVariants`; they log a development warning. See MIGRATION.md.
+
 ## 0.15.0
 
 ### Minor Changes
