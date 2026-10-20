@@ -1,5 +1,12 @@
 # @pgianni/toolbox-react
 
+## 0.14.1
+
+### Patch Changes
+
+- 65bf2ee: `Tag` reduces its left padding (to 6 px) when its content starts with an
+  icon, so the icon sits closer to the edge.
+
 ## 0.14.0
 
 ### Minor Changes
