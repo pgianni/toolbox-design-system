@@ -72,7 +72,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
     };
 
     const controlSize = size ?? "md";
-    const fieldWidth = { sm: "w-14 text-sm", md: "w-16 text-sm", lg: "w-20 text-lg" }[controlSize];
+    const fieldWidth = { sm: "w-14 text-base md:text-sm", md: "w-16 text-base md:text-sm", lg: "w-20 text-base" }[controlSize];
 
     return (
       <div className={cn(numberInputVariants({ size }), wrapperClassName)}>

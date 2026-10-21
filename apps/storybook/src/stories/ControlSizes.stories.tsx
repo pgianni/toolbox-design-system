@@ -12,6 +12,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  Tabs,
+  TabsList,
+  TabsTrigger,
   type ControlSize
 } from "@pgianni/toolbox-react";
 
@@ -108,6 +111,22 @@ function SizeRow({ size, px, band }: (typeof sizes)[number]) {
               { value: "cards", label: "Cartes" }
             ]}
           />
+        </Measured>
+        <Measured name="Tabs sans bordure">
+          <Tabs size={size} container={false} defaultValue="list">
+            <TabsList aria-label={`Onglets ${size}`}>
+              <TabsTrigger value="list">Liste</TabsTrigger>
+              <TabsTrigger value="cards">Cartes</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </Measured>
+        <Measured name="Tabs">
+          <Tabs size={size} defaultValue="list">
+            <TabsList aria-label={`Onglets avec conteneur ${size}`}>
+              <TabsTrigger value="list">Liste</TabsTrigger>
+              <TabsTrigger value="cards">Cartes</TabsTrigger>
+            </TabsList>
+          </Tabs>
         </Measured>
         <Measured name="Button primary">
           <Button size={size}>Enregistrer</Button>

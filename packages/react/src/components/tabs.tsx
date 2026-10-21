@@ -4,6 +4,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib";
 import { desktopBreakpointClassNames, type Breakpoint } from "./breakpoints";
+import type { ControlSize } from "./control-sizes";
 import {
   navItemActiveClassName,
   navItemActiveStateClassName,
@@ -56,6 +57,21 @@ type TabsVariant = NonNullable<VariantProps<typeof tabsListVariants>["variant"]>
 
 const TabsVariantContext = React.createContext<TabsVariant>("default");
 const TabsContainerContext = React.createContext(true);
+const TabsSizeContext = React.createContext<ControlSize | undefined>(undefined);
+
+// Optional sizes for pill tabs, on the shared control scale. In the container,
+// items match the SegmentedControl (26/30/34 px) so the whole bar is 36/40/44 px;
+// without it, items are the full control height.
+const containedTriggerSizeClassName: Record<ControlSize, string> = {
+  sm: "h-[26px] px-2.5 text-base md:text-sm",
+  md: "h-[30px] px-3 text-base md:text-sm",
+  lg: "h-[34px] px-3 text-base"
+};
+const bareTriggerSizeClassName: Record<ControlSize, string> = {
+  sm: "h-9 px-3 text-base md:text-sm",
+  md: "h-10 px-3 text-base md:text-sm",
+  lg: "h-11 px-4 text-base"
+};
 
 // Without the container, pill tabs sit directly on the page like AppHeaderNav.
 const noContainerClassName = "rounded-none border-0 bg-transparent p-0";
@@ -65,13 +81,20 @@ export interface TabsProps
   variant?: TabsVariant;
   /** Bordered container around pill tabs (default). `false` matches AppHeaderNav. */
   container?: boolean;
+  /**
+   * Height on the shared control scale (sm 36, md 40, lg 44 px), for pill tabs
+   * aligned with form controls. Leave unset for the default 36 px items.
+   */
+  size?: ControlSize;
 }
 
-export function Tabs({ variant = "default", container = true, ...props }: TabsProps) {
+export function Tabs({ variant = "default", container = true, size, ...props }: TabsProps) {
   return (
     <TabsVariantContext.Provider value={variant}>
       <TabsContainerContext.Provider value={container}>
-        <TabsPrimitive.Root {...props} />
+        <TabsSizeContext.Provider value={size}>
+          <TabsPrimitive.Root {...props} />
+        </TabsSizeContext.Provider>
       </TabsContainerContext.Provider>
     </TabsVariantContext.Provider>
   );
@@ -117,12 +140,18 @@ export const TabsTrigger = React.forwardRef<
   TabsTriggerProps
 >(({ className, variant, ...props }, ref) => {
   const inheritedVariant = React.useContext(TabsVariantContext);
+  const withContainer = React.useContext(TabsContainerContext);
+  const size = React.useContext(TabsSizeContext);
+  const resolvedVariant = variant ?? inheritedVariant;
 
   return (
     <TabsPrimitive.Trigger
       ref={ref}
       className={cn(
-        tabsTriggerVariants({ variant: variant ?? inheritedVariant }),
+        tabsTriggerVariants({ variant: resolvedVariant }),
+        size &&
+          resolvedVariant !== "page" &&
+          (withContainer ? containedTriggerSizeClassName : bareTriggerSizeClassName)[size],
         className
       )}
       {...props}

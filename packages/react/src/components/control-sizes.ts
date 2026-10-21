@@ -15,7 +15,14 @@ export const controlSquareClassName: Record<ControlSize, string> = {
   lg: "h-11 w-11"
 };
 
-// Text fields: 16 px on mobile (avoids iOS zoom), 14 px from md up; lg stays 16 px.
+// One text size per control size, shared by fields, buttons and segmented
+// controls: 16 px on mobile (avoids iOS zoom), 14 px from md up; lg stays 16 px.
+export const controlTextClassName: Record<ControlSize, string> = {
+  sm: "text-base md:text-sm",
+  md: "text-base md:text-sm",
+  lg: "text-base"
+};
+
 export const fieldSizeClassName: Record<ControlSize, string> = {
   sm: "h-9 px-3 text-base md:text-sm",
   md: "h-10 px-3 text-base md:text-sm",

@@ -33,9 +33,9 @@ export interface SegmentedControlProps
 
 // Item height = control height − 2 × (1 px border + 4 px padding).
 const itemSizeClassName: Record<ControlSize, string> = {
-  sm: "h-[26px] px-2.5",
-  md: "h-[30px] px-3",
-  lg: "h-[34px] px-3"
+  sm: "h-[26px] px-2.5 text-base md:text-sm",
+  md: "h-[30px] px-3 text-base md:text-sm",
+  lg: "h-[34px] px-3 text-base"
 };
 const iconOnlyItemClassName: Record<ControlSize, string> = {
   sm: "w-[26px] px-0",

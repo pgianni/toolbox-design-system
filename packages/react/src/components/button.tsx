@@ -36,9 +36,9 @@ export const buttonVariants = cva(
         "brand-ghost": "rounded-full text-primary hover:bg-primary/10 dark:hover:bg-primary/20"
       },
       size: {
-        default: "h-10 px-4 py-2 text-sm",
-        sm: "h-9 px-3 text-sm",
-        md: "h-10 px-4 py-2 text-sm",
+        default: "h-10 px-4 py-2 text-base md:text-sm",
+        sm: "h-9 px-3 text-base md:text-sm",
+        md: "h-10 px-4 py-2 text-base md:text-sm",
         lg: "h-11 px-6 text-base",
         icon: "h-10 w-10",
         "icon-xs": "h-6 w-6 p-0 [&_svg]:size-3",

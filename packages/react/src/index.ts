@@ -255,7 +255,7 @@ export {
   type NumberInputProps
 } from "./components/number-input";
 export { SearchInput, type SearchInputProps } from "./components/search-input";
-export type { ControlSize } from "./components/control-sizes";
+export { controlTextClassName, type ControlSize } from "./components/control-sizes";
 export {
   Popover,
   PopoverTrigger,
