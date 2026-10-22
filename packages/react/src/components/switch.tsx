@@ -5,8 +5,10 @@ import { cn } from "../lib";
 
 const switchVariants = cva(
   // Same interactions as Checkbox: darker on hover, purple tint and a slight
-  // shrink while pressed.
-  "peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-[color,background-color,transform] duration-fast ease-out-soft [&:not(:disabled)]:active:scale-95 motion-reduce:transform-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:[&:not(:disabled)]:hover:bg-primary/90 data-[state=checked]:[&:not(:disabled)]:active:bg-primary/80 data-[state=unchecked]:bg-input data-[state=unchecked]:[&:not(:disabled)]:hover:bg-muted-foreground/30 data-[state=unchecked]:[&:not(:disabled)]:active:bg-primary/25",
+  // shrink while pressed. Both tracks keep at least 3:1 against the page and
+  // the thumb (WCAG 1.4.11): grey when off, action violet when on (lighter in
+  // dark mode, where the thumb is dark).
+  "peer inline-flex shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-[color,background-color,transform] duration-fast ease-out-soft [&:not(:disabled)]:active:scale-95 motion-reduce:transform-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-action-foreground data-[state=checked]:[&:not(:disabled)]:hover:bg-action-foreground/90 data-[state=checked]:[&:not(:disabled)]:active:bg-action-foreground/80 data-[state=unchecked]:bg-muted-foreground data-[state=unchecked]:[&:not(:disabled)]:hover:bg-foreground/70 data-[state=unchecked]:[&:not(:disabled)]:active:bg-action-foreground/70",
   {
     variants: {
       size: {
