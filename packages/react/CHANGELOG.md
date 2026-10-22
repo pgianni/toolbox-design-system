@@ -1,5 +1,11 @@
 # @pgianni/toolbox-react
 
+## 0.19.0
+
+### Minor Changes
+
+- c15e947: Add `MultiSelect`: a Select that keeps several values, with an optional picture per option (people filters). The first entry ("Tous" by default) clears the selection; the field shows the chosen pictures stacked (with "+N" past `maxAvatars`) and the names separated by commas. Same field style and sizes as `Select`.
+
 ## 0.18.0
 
 ### Minor Changes
