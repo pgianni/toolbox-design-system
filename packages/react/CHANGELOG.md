@@ -1,5 +1,11 @@
 # @pgianni/toolbox-react
 
+## 0.20.0
+
+### Minor Changes
+
+- 1e0bfac: Add `TimePicker`: same field as `DatePicker` with a primary clock icon, opening two scrollable columns (hours, minutes) instead of the browser's native picker. Value as "HH:mm", `minuteStep` (5 by default), `minHour`/`maxHour` for office hours, keyboard navigation with arrow keys.
+
 ## 0.19.2
 
 ### Patch Changes
