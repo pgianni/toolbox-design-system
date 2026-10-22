@@ -1,5 +1,12 @@
 # @pgianni/toolbox-react
 
+## 0.19.1
+
+### Patch Changes
+
+- 41037c8: Chevrons of Accordion, Select and MultiSelect now rotate with a soft ease-out, without the spring overshoot.
+- 8b3f33e: Darken the icon of tertiary buttons (70% of the text color instead of the muted grey), which also affects `AppHeaderThemeToggle`.
+
 ## 0.19.0
 
 ### Minor Changes
