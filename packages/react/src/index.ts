@@ -270,3 +270,4 @@ export {
   type MultiSelectOption,
   type MultiSelectProps
 } from "./components/multi-select";
+export { TimePicker, type TimePickerProps } from "./components/time-picker";
