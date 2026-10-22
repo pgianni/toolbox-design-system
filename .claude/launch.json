@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "storybook-static",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "http-server", "apps/storybook/storybook-static", "-p", "6008", "-s", "-c-1"],
+      "port": 6008
+    }
+  ]
+}

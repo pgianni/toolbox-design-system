@@ -265,3 +265,8 @@ export {
 } from "./components/popover";
 export { Calendar, type CalendarProps } from "./components/calendar";
 export { DatePicker, type DatePickerProps } from "./components/date-picker";
+export {
+  MultiSelect,
+  type MultiSelectOption,
+  type MultiSelectProps
+} from "./components/multi-select";
