@@ -1,5 +1,11 @@
 # @pgianni/toolbox-react
 
+## 0.19.2
+
+### Patch Changes
+
+- d7ca7c1: Disabled fields (Input, Textarea, NumberInput, SelectTrigger, and SearchInput through Input) no longer change background on hover or press.
+
 ## 0.19.1
 
 ### Patch Changes
