@@ -15,9 +15,29 @@ function aboveBottomNav(offset: Offset, base: string): Offset {
   return offset;
 }
 
+// Apps switch theme with a `dark` class on <html> (next-themes, Storybook),
+// not only through the OS setting, so the toasts follow that class.
+function useDocumentTheme(): "light" | "dark" {
+  const read = () =>
+    typeof document !== "undefined" && document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+  const [theme, setTheme] = React.useState<"light" | "dark">(read);
+
+  React.useEffect(() => {
+    const root = document.documentElement;
+    const observer = new MutationObserver(() => setTheme(read()));
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    setTheme(read());
+    return () => observer.disconnect();
+  }, []);
+
+  return theme;
+}
+
 function Toaster({
   className,
-  theme = "system",
+  theme,
   position = "bottom-right",
   closeButton = true,
   richColors = true,
@@ -27,10 +47,11 @@ function Toaster({
   ...props
 }: ToasterProps) {
   const classNames = toastOptions?.classNames;
+  const documentTheme = useDocumentTheme();
 
   return (
     <SonnerToaster
-      theme={theme}
+      theme={theme ?? documentTheme}
       position={position}
       closeButton={closeButton}
       richColors={richColors}

@@ -69,3 +69,9 @@ export const AboveMobileTabBar: Story = {
     </div>
   )
 };
+
+export const Dark: Story = {
+  name: "Sombre",
+  globals: { theme: "dark" },
+  render: Variants.render
+};
