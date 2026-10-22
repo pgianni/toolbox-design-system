@@ -64,7 +64,7 @@ function ChevronDownIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-base ease-spring motion-reduce:transition-none"
+      className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-base ease-out-soft motion-reduce:transition-none"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

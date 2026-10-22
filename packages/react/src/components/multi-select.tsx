@@ -214,7 +214,7 @@ function ChevronIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="h-4 w-4 shrink-0 text-action-foreground transition-transform duration-base ease-spring group-data-[state=open]:rotate-180 motion-reduce:transition-none"
+      className="h-4 w-4 shrink-0 text-action-foreground transition-transform duration-base ease-out-soft group-data-[state=open]:rotate-180 motion-reduce:transition-none"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
