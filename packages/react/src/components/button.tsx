@@ -18,9 +18,9 @@ export const buttonVariants = cva(
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 active:translate-y-0.5 disabled:hover:bg-destructive",
         secondary:
           "border border-input bg-background text-action-foreground hover:bg-accent hover:text-action-foreground active:translate-y-0.5 disabled:hover:bg-background",
-        // No border or background at rest; the icon is a lighter grey than the label.
+        // No border or background at rest; the icon is a softer grey than the label.
         tertiary:
-          "border border-transparent bg-transparent hover:bg-accent hover:text-accent-foreground active:translate-y-0.5 disabled:hover:bg-transparent disabled:hover:text-inherit [&_svg]:text-muted-foreground",
+          "border border-transparent bg-transparent hover:bg-accent hover:text-accent-foreground active:translate-y-0.5 disabled:hover:bg-transparent disabled:hover:text-inherit [&_svg]:text-foreground/70",
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground active:translate-y-0.5 disabled:hover:bg-background disabled:hover:text-inherit",
         ghost:
