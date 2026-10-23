@@ -1,5 +1,11 @@
 # @pgianni/toolbox-react
 
+## 0.21.1
+
+### Patch Changes
+
+- 8b9d06c: Soft tags no longer show a border (it stays transparent so soft, outline and solid tags keep the same size).
+
 ## 0.21.0
 
 ### Minor Changes
