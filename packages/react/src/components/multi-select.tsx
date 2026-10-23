@@ -28,6 +28,8 @@ export interface MultiSelectProps {
   allLabel?: string | null;
   /** Field text when nothing is selected and there is no `allLabel`. */
   placeholder?: string;
+  /** Accessible name of the clear button shown once something is selected. */
+  clearLabel?: string;
   /** Height on the shared control scale: sm 36, md 40 (default), lg 44 px. */
   size?: ControlSize;
   /** Avatars stacked in the field before a "+N" counter. */
@@ -59,6 +61,15 @@ function OptionAvatar({ option, className }: { option: MultiSelectOption; classN
   );
 }
 
+// Pulls the clear button back over the spacer before the chevron: chevron
+// (16 px) + gap (8 px) + right padding (12 px, 16 px in lg). The right margin
+// gives the same width back so the wrapper stays as wide as the field.
+const clearOffsetClassName: Record<ControlSize, string> = {
+  sm: "-ml-[60px] mr-[36px]",
+  md: "-ml-[60px] mr-[36px]",
+  lg: "-ml-[64px] mr-[40px]"
+};
+
 const itemClassName =
   "relative flex w-full cursor-pointer select-none items-center gap-2 rounded-md py-1.5 pl-2 pr-8 text-sm outline-none transition-colors duration-fast ease-out-soft focus:bg-accent focus:text-accent-foreground active:bg-primary/10 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[state=checked]:font-medium data-[state=checked]:text-action-foreground";
 
@@ -75,6 +86,7 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
       onValueChange,
       allLabel = "Tous",
       placeholder = "Sélectionner",
+      clearLabel = "Réinitialiser la sélection",
       size = "md",
       maxAvatars = 3,
       disabled,
@@ -107,46 +119,76 @@ export const MultiSelect = React.forwardRef<HTMLButtonElement, MultiSelectProps>
     // Keeps the menu open while picking several options.
     const keepOpen = (event: Event) => event.preventDefault();
 
+    const triggerRef = React.useRef<HTMLButtonElement | null>(null);
+    const setTriggerRef = (node: HTMLButtonElement | null) => {
+      triggerRef.current = node;
+      if (typeof ref === "function") ref(node);
+      else if (ref) ref.current = node;
+    };
+    const clearable = selectedOptions.length > 0 && !disabled;
+
     return (
       <DropdownMenuPrimitive.Root modal={false}>
-        <DropdownMenuPrimitive.Trigger asChild disabled={disabled}>
-          <button
-            ref={ref}
-            type="button"
-            data-placeholder={selectedOptions.length === 0 && allLabel == null ? "" : undefined}
-            className={cn(
-              "group flex w-full min-w-0 cursor-pointer items-center justify-between gap-2 rounded-md border border-input bg-background py-2 text-left ring-offset-background transition-colors duration-fast ease-out-soft hover:bg-accent active:bg-input focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-background disabled:active:bg-background data-[placeholder]:text-muted-foreground",
-              fieldSizeClassName[size],
-              className
-            )}
-            {...props}
-          >
-            <span className="flex min-w-0 items-center gap-2">
-              {hasAvatars && shownAvatars.length > 0 ? (
-                <span className="flex shrink-0 -space-x-1.5">
-                  {shownAvatars.map((option) => (
-                    <OptionAvatar
-                      key={option.value}
-                      option={option}
-                      className="h-6 w-6 ring-2 ring-background"
-                    />
-                  ))}
-                  {hiddenCount > 0 ? (
-                    <span className="relative flex h-6 min-w-6 items-center justify-center rounded-full bg-muted px-1 text-[10px] font-semibold text-muted-foreground ring-2 ring-background">
-                      +{hiddenCount}
-                    </span>
-                  ) : null}
+        {/* The clear button cannot sit inside the trigger (no nested buttons):
+            it follows it and is pulled back over a spacer kept in the field. */}
+        <div className="flex min-w-0 items-center">
+          <DropdownMenuPrimitive.Trigger asChild disabled={disabled}>
+            <button
+              ref={setTriggerRef}
+              type="button"
+              data-placeholder={selectedOptions.length === 0 && allLabel == null ? "" : undefined}
+              className={cn(
+                "group flex w-full min-w-0 cursor-pointer items-center justify-between gap-2 rounded-md border border-input bg-background py-2 text-left ring-offset-background transition-colors duration-fast ease-out-soft hover:bg-accent active:bg-input focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-background disabled:active:bg-background data-[placeholder]:text-muted-foreground",
+                fieldSizeClassName[size],
+                className
+              )}
+              {...props}
+            >
+              <span className="flex min-w-0 items-center gap-2">
+                {hasAvatars && shownAvatars.length > 0 ? (
+                  <span className="flex shrink-0 -space-x-1.5">
+                    {shownAvatars.map((option) => (
+                      <OptionAvatar
+                        key={option.value}
+                        option={option}
+                        className="h-6 w-6 ring-2 ring-background"
+                      />
+                    ))}
+                    {hiddenCount > 0 ? (
+                      <span className="relative flex h-6 min-w-6 items-center justify-center rounded-full bg-muted px-1 text-[10px] font-semibold text-muted-foreground ring-2 ring-background">
+                        +{hiddenCount}
+                      </span>
+                    ) : null}
+                  </span>
+                ) : null}
+                <span className="truncate">
+                  {selectedOptions.length > 0
+                    ? selectedOptions.map((option) => option.label).join(", ")
+                    : emptyLabel}
                 </span>
-              ) : null}
-              <span className="truncate">
-                {selectedOptions.length > 0
-                  ? selectedOptions.map((option) => option.label).join(", ")
-                  : emptyLabel}
               </span>
-            </span>
-            <ChevronIcon />
-          </button>
-        </DropdownMenuPrimitive.Trigger>
+              {clearable ? <span aria-hidden="true" className="h-6 w-6 shrink-0" /> : null}
+              <ChevronIcon />
+            </button>
+          </DropdownMenuPrimitive.Trigger>
+          {clearable ? (
+            <button
+              type="button"
+              aria-label={clearLabel}
+              title={clearLabel}
+              onClick={() => {
+                setSelected([]);
+                triggerRef.current?.focus();
+              }}
+              className={cn(
+                "relative z-10 inline-flex h-6 w-6 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-[color,background-color,transform] duration-fast ease-out-soft hover:bg-input hover:text-foreground active:scale-90 active:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transform-none",
+                clearOffsetClassName[size]
+              )}
+            >
+              <ClearIcon />
+            </button>
+          ) : null}
+        </div>
         <DropdownMenuPrimitive.Portal>
           <DropdownMenuPrimitive.Content
             align="start"
@@ -207,6 +249,23 @@ function ItemCheck() {
         </svg>
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
+  );
+}
+
+function ClearIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="h-3.5 w-3.5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.25"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M18 6 6 18M6 6l12 12" />
+    </svg>
   );
 }
 

@@ -72,6 +72,21 @@ export const WithSelection: Story = {
   )
 };
 
+export const Clear: Story = {
+  name: "Réinitialiser avec la croix",
+  render: (args) => <PeopleFilter {...args} defaultValue={["camille", "hugo"]} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const trigger = canvas.getByRole("button", { name: /Personnes/ });
+
+    await expect(trigger).toHaveTextContent("Camille Martin, Hugo Bernard");
+    await userEvent.click(canvas.getByRole("button", { name: "Réinitialiser la sélection" }));
+    await expect(trigger).toHaveTextContent("Tous");
+    await expect(canvas.queryByRole("button", { name: "Réinitialiser la sélection" })).toBeNull();
+    await expect(trigger).toHaveFocus();
+  }
+};
+
 export const Sizes: Story = {
   name: "Tailles",
   render: (args) => (
