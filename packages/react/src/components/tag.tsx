@@ -11,15 +11,16 @@ import { navItemPressClassName } from "./nav-item-styles";
 export type TagTone = "neutral" | "primary" | "info" | "success" | "warning" | "danger";
 export type TagAppearance = "soft" | "solid" | "outline";
 
-// Written out in full so Tailwind finds every class.
+// Written out in full so Tailwind finds every class. Soft tags keep a
+// transparent border so every appearance has the same size.
 const toneClassNames: Record<TagAppearance, Record<TagTone, string>> = {
   soft: {
-    neutral: "border-neutral-border bg-neutral-soft text-neutral-soft-foreground",
-    primary: "border-primary/25 bg-primary/10 text-action-foreground dark:border-action-foreground/30 dark:bg-action-foreground/10",
-    info: "border-info-border bg-info-soft text-info-soft-foreground",
-    success: "border-success-border bg-success-soft text-success-soft-foreground",
-    warning: "border-warning-border bg-warning-soft text-warning-soft-foreground",
-    danger: "border-danger-border bg-danger-soft text-danger-soft-foreground"
+    neutral: "border-transparent bg-neutral-soft text-neutral-soft-foreground",
+    primary: "border-transparent bg-primary/10 text-action-foreground dark:bg-action-foreground/10",
+    info: "border-transparent bg-info-soft text-info-soft-foreground",
+    success: "border-transparent bg-success-soft text-success-soft-foreground",
+    warning: "border-transparent bg-warning-soft text-warning-soft-foreground",
+    danger: "border-transparent bg-danger-soft text-danger-soft-foreground"
   },
   solid: {
     neutral: "border-transparent bg-neutral text-neutral-foreground",
