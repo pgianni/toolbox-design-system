@@ -1,5 +1,16 @@
 # @pgianni/toolbox-react
 
+## 0.21.0
+
+### Minor Changes
+
+- 888d8cc: MultiSelect shows a clear cross before the chevron once at least one option is selected; it resets the selection and gives focus back to the field. Its accessible name is set with `clearLabel` ("Réinitialiser la sélection" by default).
+
+### Patch Changes
+
+- d78887d: Raise Switch contrast to WCAG 1.4.11 (3:1): the off track is now the muted grey instead of the input border color, and the on track uses the action violet, which is lighter in dark mode so the dark thumb stays visible.
+- b21bfc4: Toasts follow the app's dark mode: without a `theme` prop, the Toaster now reads the `dark` class on `<html>` (next-themes, Storybook) instead of the OS setting.
+
 ## 0.20.0
 
 ### Minor Changes
