@@ -1,5 +1,11 @@
 # @pgianni/toolbox-theme
 
+## 0.6.1
+
+### Patch Changes
+
+- 4fd9009: SidePanel opens and closes with a slight bounce: it overshoots by 6 px before settling, and pulls back by 6 px before leaving (still disabled with reduced motion).
+
 ## 0.6.0
 
 ### Minor Changes
