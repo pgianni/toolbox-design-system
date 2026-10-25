@@ -1,5 +1,11 @@
 # @pgianni/toolbox-theme
 
+## 0.6.2
+
+### Patch Changes
+
+- 5f41eb3: SidePanel keeps its bounce on entry only; it leaves with a plain slide again.
+
 ## 0.6.1
 
 ### Patch Changes
