@@ -134,8 +134,8 @@ module.exports = {
           from: { height: "var(--radix-collapsible-content-height)" },
           to: { height: "0" }
         },
-        // Slight bounce: the panel overshoots by 6 px before settling, and
-        // pulls back by 6 px before leaving.
+        // Slight bounce on entry only: the panel overshoots by 6 px before
+        // settling. It leaves with a plain slide.
         "side-panel-in": {
           "0%": {
             transform: "translateX(calc(100% + 12px))",
@@ -148,12 +148,8 @@ module.exports = {
           "100%": { transform: "translateX(0)" }
         },
         "side-panel-out": {
-          "0%": { transform: "translateX(0)", animationTimingFunction: "ease-out" },
-          "25%": {
-            transform: "translateX(-6px)",
-            animationTimingFunction: "cubic-bezier(0.55, 0, 1, 0.45)"
-          },
-          "100%": { transform: "translateX(calc(100% + 12px))" }
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(100% + 12px))" }
         },
         "fade-in": {
           from: { opacity: "0" },
@@ -206,9 +202,9 @@ module.exports = {
         "accordion-up": `accordion-up ${motion.duration.fast} ${motion.easing.outSoft}`,
         "collapsible-down": `collapsible-down ${motion.duration.base} ${motion.easing.outSoft}`,
         "collapsible-up": `collapsible-up ${motion.duration.fast} ${motion.easing.outSoft}`,
-        // Easing is set per keyframe; the bounce needs a bit more time.
+        // Entry easing is set per keyframe; the bounce needs a bit more time.
         "side-panel-in": "side-panel-in 420ms linear",
-        "side-panel-out": "side-panel-out 280ms linear",
+        "side-panel-out": `side-panel-out ${motion.duration.base} ${motion.easing.drawer}`,
         "fade-in": `fade-in ${motion.duration.base} ${motion.easing.outSoft}`,
         "fade-out": `fade-out ${motion.duration.fast} ${motion.easing.outSoft}`,
         "dialog-in": `dialog-in ${motion.duration.base} ${motion.easing.spring}`,
